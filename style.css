@@ -9,7 +9,7 @@
   z-index: 1;
   background-repeat: none;
   background-position: center;
-  background-size:cover;
+  background-size: cover;
 }
 
 
@@ -26,20 +26,66 @@
   color: white;
 }
 
-Level-Counter a:hover{
-  text-decoration:underline;
-  background-color:grey;
+
+
+/* Style the code editor container */
+.code-editor {
+  width: 100%;
+  max-width: 800px;
+  padding: 20px;
+  border-radius: 5px;
 }
-.Level-Counter {
-  font-size: 46px;
-  left: 27%;
-  position: https://github.com/RohitB2005/Code-Adventure-REAL.git;
+
+/* Style the code input area */
+.code-input {
+  width: 100%;
+  height: 150px;
+  resize: none;
+  font-family: monospace;
+  font-size: 16px;
+  color: #c5c8c6;
+  background-color: #1d1f21;
+  border: 1px solid #373b41;
+  border-radius: 5px;
+  padding-bottom: 50px;
+  overflow-x: auto;
+  white-space: pre-wrap;
+}
+
+/* Highlight the code area when focused */
+.code-input:focus {
+  outline: none;
+  border-color: #81a2be;
+}
+
+.Submit {
+  background-color: blue;
+  color: white;
+  border-radius: 10px;
+  text-align: center;
+  text-decoration: none;
+  display: block;
+  font-size: 40px;
+  margin-top: 5px;
+  margin-left: 80%;
+  font-family: 'Jost', sans-serif;
+}
+
+.Submit:hover{
+  background-color: #434aff;
+}
+
+
+.lesson-selector {
+  left: 33%;
+  position: relative;
   top: 5%;
-  background-color: maroon;
   border-radius: 15px;
   padding: 3px;
+  font-size: 24px;
 }
-.Instructions{
+
+.Instructions {
   font-size: 22px;
   top: 25%;
   position: absolute;
@@ -57,7 +103,19 @@ Level-Counter a:hover{
   right: 0.75%;
 }
 
-
+.lesson-selector:hover{ 
+ background-color:#434aff;
+}
+.lesson-selector {
+  display: block;
+  width: 200px;
+  height: 50px;
+  text-align: center;
+  background-color: blue;
+  color: white;
+  border-radius: 15px;
+  font-family:'Jost', sans-serif;
+}
 
 
 

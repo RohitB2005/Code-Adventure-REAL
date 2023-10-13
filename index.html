@@ -5,8 +5,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
   <title>Code Adventure</title>
-  <link href="style.css" rel="stylesheet" type="text/css" <link rel="stylesheet"
-    href="https://fonts.googleapis.com/css?family=Jost">
+  <link href="style.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Jost">
 </head>
 
 <body style="background-color: #181D2E;margin:0;">
@@ -44,31 +44,43 @@
   <!-- These two are simply empty space to help keep the website less cluttered -->
   <div class="Empty-Space">
   </div>
-  
+
   <div class="Empty-Space-2">
   </div>
 
-  <!-- This section will present users with instuctions, show the model answer, and help relay the story to them -->
+  <!-- This section will present users with instructions, show the model answer, and help relay the story to them -->
   <div class="Instructions-Level">
-    <p1 class="Level-Counter">Level 1 of 10 ▼</p1>
-    <p2 class="Instructions"> Welcome to Code Adventure! Learn the basics and components of coding in a quick, simple and fun way.
-    </p2>  
-   
-
-    </div>
-
+    <!--<p1 class="Level-Counter">Level 1 of 10 ▼</p1>-->
+    <select class="lesson-selector">
+      <option value="1" href="index.html">Level 1 of 10</option>
+      <option value="2" href="level2.html">Level 2 of 10</option>
+      <option value="3" href="level3.html">Level 3 of 10</option>
+      <option value="4">Level 4 of 10</option>
+      <option value="4">Level 5 of 10</option>
+      <option value="4">Level 6 of10</option>
+      <option value="4">Level 7 of 10</option>
+      <option value="4">Level 8 of 10</option>
+      <option value="4">Level 9 of 10</option>
+      <option value="4">Level 10 of 10</option>
+      
+    </select>
+    <p2 class="Instructions"> Welcome to Code Adventure! Learn the basics and components of coding in a quick, simple
+      and fun way.
+    </p2>
+  </div>
 
   <!-- This is where users will type their code and check their answer when answering each level -->
   <div class="Code-Input-Box">
-
+    <div class="code-editor">
+      <!--<pre class="code-input" contenteditable="true"></pre>-->
+      <textarea class="code-input" placeholder="/*Enter your code here*/"></textarea>
+      <button class="Submit">Submit</button>
+    </div>
   </div>
-
-
 
 
   <script src="script.js"></script>
-  </div>
-  </style>
+
 </body>
 
 </html>
