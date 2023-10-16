@@ -10,6 +10,7 @@
   background-repeat: none;
   background-position: center;
   background-size: cover;
+  image-rendering: pixelated;
 }
 
 
@@ -38,6 +39,7 @@
 
 /* Style the code input area */
 .code-input {
+  position: relative;
   width: 100%;
   height: 150px;
   resize: none;
@@ -64,15 +66,16 @@
   border-radius: 10px;
   text-align: center;
   text-decoration: none;
-  display: block;
   font-size: 40px;
   margin-top: 5px;
-  margin-left: 80%;
+  margin-left: 84%;
   font-family: 'Jost', sans-serif;
+  outline: none;
 }
 
-.Submit:hover{
+.Submit:hover {
   background-color: #434aff;
+  cursor: pointer;
 }
 
 
@@ -103,9 +106,11 @@
   right: 0.75%;
 }
 
-.lesson-selector:hover{ 
- background-color:#434aff;
+.lesson-selector:hover {
+  background-color: #434aff;
+  cursor: pointer;
 }
+
 .lesson-selector {
   display: block;
   width: 200px;
@@ -114,7 +119,7 @@
   background-color: blue;
   color: white;
   border-radius: 15px;
-  font-family:'Jost', sans-serif;
+  font-family: 'Jost', sans-serif;
 }
 
 
@@ -142,6 +147,7 @@ nav {
   font-size: 22px;
   align-items: center;
   transform: translateX(-30px);
+  z-index: 999;
 }
 
 
@@ -182,7 +188,6 @@ nav {
   border-radius: 20px;
   min-width: 120px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-  z-index: 1;
   left: -72px;
   animation: slide-down 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
   transform-origin: top center;
@@ -208,6 +213,7 @@ nav {
   padding: 12px 16px;
   text-decoration: none;
   display: block;
+
 }
 
 /* Hover effect for buttons in dropdown menu */
@@ -223,11 +229,253 @@ nav {
 }
 
 
+/* Game Characters And Animation */
+#Character {
+  position: relative;
+  image-rendering: pixelated;
+  height: 20%;
+  width: 15%;
+  top: 35%;
+  left: 36%;
+  animation-name: idle;
+  animation-duration: 1.7s;
+  animation-iteration-count: infinite;
+  animation-timing-function: steps(5);
+}
+
+@keyframes idle {
+  0% {
+    content: url(images/adventurer-idle-00.png)
+  }
+
+  25% {
+    content: url(images/adventurer-idle-01.png)
+  }
+
+  50% {
+    content: url(images/adventurer-idle-02.png)
+  }
+
+  75% {
+    content: url(images/adventurer-idle-03.png)
+  }
+
+  100% {
+    content: url(images/adventurer-idle-00.png)
+  }
+}
 
 /* Game Items */
 #SwordItem {
+  position: relative;
+  left: 73%;
+  top: 63%;
+  height: 20%;
+  width: 7%;
+  image-rendering: pixelated;
+}
+
+/* Error Page Text */
+.Error-Text {
   position: absolute;
-  width: 75px;
-  top: 60%;
+  font-family: 'Jost', sans-serif;
+  font-size: 80px;
+  text-align: center;
+  color: white;
+  top: 15%;
+  left: 50%;
+  min-width: 100%;
+  transform: translateX(-50%);
+}
+
+
+
+.Return-Home {
+  position: absolute;
+  font-family: 'Jost', sans-serif;
+  font-size: 80px;
+  text-align: center;
+  color: white;
+  top: 65%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.Return-Home:hover {
+  color: #c5c8c6;
+}
+
+#ErrorImage {
+  position: absolute;
+  height: 40%;
+  width: 30%;
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  image-rendering: pixelated;
+  animation-name: ErrorDead;
+  animation-duration: 2.5s;
+  animation-iteration-count: infinite;
+  animation-timing-function: steps(8);
+}
+
+@keyframes ErrorDead {
+  10.71427% {
+    content: url(images/adventurer-die-00-1.3.png)
+  }
+
+  21.42857% {
+    content: url(images/adventurer-die-01-1.3.png)
+  }
+
+  32.14284% {
+    content: url(images/adventurer-die-02-1.3.png)
+  }
+
+  42.85711% {
+    content: url(images/adventurer-die-03-1.3.png)
+  }
+
+  53.57138% {
+    content: url(images/adventurer-die-04-1.3.png)
+  }
+
+  64.28565% {
+    content: url(images/adventurer-die-05-1.3.png)
+  }
+
+  75% {
+    content: url(images/adventurer-die-06-1.3.png)
+  }
+
+  100% {
+    content: url(images/adventurer-die-06-1.3.png)
+  }
+}
+
+.Gif-Banner {
+  position: relative;
+  image-rendering: pixelated;
+  width: 100%;
+  height: 40vh;
+}
+
+.Gif-Banner-Image {
+  image-rendering: pixelated;
+  width: 100%;
+  max-height: 100%;
+  object-fit: fill;
+}
+
+.About-Us {
+  position: relative;
+  font-family: 'Jost', sans-serif;
+  font-size: 100px;
+  font-weight: 100px;
+  bottom: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+
+.Other-Challenges-Header {
+  position: absolute;
+  font-family: 'Jost', sans-serif;
+  font-size: 2vw;
+  color: white;
   right: 20%;
+  bottom: 38%;
+  text-decoration: underline;
+}
+
+.Other-Challenges {
+  position: absolute;
+  font-family: 'Jost', sans-serif;
+  font-size: 1.7vw;
+  color: white;
+  text-decoration: underline;
+  right: 20%;
+  bottom: 3%;
+  max-width: 15%;
+  line-height: 4.5vw;
+}
+
+.Other-Challenges a {
+  text-decoration: none;
+  color: white;
+}
+
+.HTML:hover {
+  color: #c5c8c6;
+  text-decoration: underline;
+}
+
+.CSS:hover {
+  color: #c5c8c6;
+  text-decoration: underline;
+}
+
+.Javascript:hover {
+  color: #c5c8c6;
+  text-decoration: underline;
+}
+
+.Challenge-Images {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 10vh;
+  margin-left: 25%;
+}
+
+.CSS-Challenge,
+.HTML-Challenge,
+.Javascript-Challenge {
+  position: relative;
+  width: 10%;
+  height: 11vh;
+  margin-top: 1.5vh;
+  transition: transform 0.2s ease;
+}
+
+
+.CSS-Challenge:hover {
+  transform: scale(1.1);
+}
+
+.HTML-Challenge:hover {
+  transform: scale(1.1);
+}
+
+.Javascript-Challenge:hover {
+  transform: scale(1.1);
+}
+
+a img {
+  max-width: 100%;
+  /* Ensure the image does not exceed its original width */
+  height: auto;
+  /* Maintain aspect ratio */
+}
+
+
+
+.Our-Purpose-Title {
+  position: absolute;
+  font-family: 'Jost', sans-serif;
+  font-size: 2vw;
+  color: white;
+  left: 3%;
+  bottom: 43%;
+  text-decoration: underline;
+}
+
+.Our-Purpose-Paragraph {
+  position: absolute;
+  font-family: 'Jost', sans-serif;
+  font-size: 0.9vw;
+  color: white;
+  left: 3%;
+  bottom: 5%;
+  max-width: 25%;
 }
