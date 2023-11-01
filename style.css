@@ -235,7 +235,6 @@
 /* Game Characters And Animation */
 #Character {
   position: relative;
-  image-rendering: pixelated;
   height: 20%;
   width: 15%;
   top: 35%;
@@ -277,3 +276,51 @@
   width: 7%;
   image-rendering: pixelated;
 }
+
+@keyframes characterAnimation {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.2);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes newIdleAnimation {
+  0% {
+    content: url(images/idle-sword-hand-1.png)
+  }
+
+  25% {
+    content: url(images/idle-sword-hand-2.png)
+  }
+
+  50% {
+    content: url(images/idle-sword-hand-3.png)
+  }
+
+  75% {
+    content: url(images/idle-sword-hand-4.png)
+  }
+
+  100% {
+    content: url(images/idle-sword-hand-1.png)
+  }
+}
+
+@keyframes hideSword {
+  0% {
+    opacity: 1; /* Fully visible */
+  }
+  100% {
+    opacity: 0; /* Fully transparent (hidden) */
+  }
+}
+
+
+
