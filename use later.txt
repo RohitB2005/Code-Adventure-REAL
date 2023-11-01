@@ -1,4 +1,10 @@
 NOTE: animate submit button, find animation for level counter, embed game window, only need to do 1 level but try to make 5, set up log in, about and 404/in progress page
 
+ask to embed game window
+how to make things associated to levels
+how to transition to different levels
+
 https://cardinalzebra.itch.io/dungeon-tiles-1
 https://brullov.itch.io/generic-char-asset?download
+EM
+REM

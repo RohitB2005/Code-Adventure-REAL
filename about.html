@@ -4,8 +4,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
-  <title>Code Adventure</title>
-  <link href="style.css" rel="stylesheet" type="text/css">
+  <title>About Us</title>
+  <link href="style_about.css" rel="stylesheet" type="text/css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Jost">
 </head>
 
@@ -13,54 +13,34 @@
   <!-- This is the NavBar where users can navigate to different pages -->
   <div class="NavBar header">
     <a href="index.html">
-      <img class="header-logo" src="images/Logo.png">
+      <img class="header-logo" alt="Logo" src="images/Logo.png">
     </a>
 
-    <nav>
-      <li><a class="Log in" href="login.html">Log in</a></li>
-      <li><a class="Sign Up" href="signup.html">Sign up</a></li>
+    <ul class="nav">
+      <li><a class="Log in" href="login.html#login">Log in</a></li>
+      <li><a class="Sign Up" href="login.html#signup">Sign up</a></li>
       <li><a class="About" href="about.html">About</a></li>
 
       <!-- Adding the dropdown menu container -->
       <div class="Menu">
-        <img class="menu-icon" src="images/menu-symbol-of-three-parallel-lines 1.png">
+        <img class="menu-icon" alt="menu-selector" src="images/menu-symbol-of-three-parallel-lines1.png">
         <div class="menu-content">
           <a href="index.html">HTML</a>
           <a href="error.html">CSS</a>
           <a href="error.html">Javascript</a>
         </div>
       </div>
-      </li>
-    </nav>
+    </ul>
   </div>
 
   <div class="Gif-Banner">
     <img class="Gif-Banner-Image" src="images/about-gif.gif">
     <img class="About-Us" src="images/About Us.png">
   </div>
-  <p class="Other-Challenges-Header">Other Challenges</p>
-
-  <div class="Other-Challenges">
-    <p><a class="HTML" href="https://codingfantasy.com/" target="_blank">Learn HTML</a></p>
-    <p><a class="CSS" href="https://flukeout.github.io/" target="_blank">Learn CSS</a></p>
-    <p"><a class="Javascript" href="https://codecombat.com/" target="_blank">Learn JS/Python</a></p>
-  </div>
-
-  <div class="Challenge-Images">
-    <a href="https://codingfantasy.com/" class="HTML-Challenge">
-      <img src="images/codingfantasy.png" alt="HTML Challenge">
-    </a>
-    <a href="https://flukeout.github.io/" class="CSS-Challenge">
-      <img src="images/cssdiner.jpg" alt="CSS Challenge">
-    </a>
-    <a href="https://codecombat.com/" class="Javascript-Challenge">
-      <img src="images/CODECOMBAT.jpg" alt="JavaScript Challenge">
-    </a>
-  </div>
-
+<div class="about-page-content">
   <div class="Our-Purpose">
-    <p6 class="Our-Purpose-Title">Our Purpose</p6>
-    <p7 class="Our-Purpose-Paragraph">Code Adventure's purpose is to make learning the fundamentals of coding an
+    <p class="about-header Our-Purpose-Title">Our Purpose</p>
+    <p class="Our-Purpose-Paragraph">Code Adventure's purpose is to make learning the fundamentals of coding an
       engaging and enjoyable experience. We believe that coding is a vital skill in today's digital world, and we're
       committed to breaking down the barriers that can make it seem intimidating and off-putting to so many people.
       Although our website is in progress and being updated and improved each day, our mission is to provide users with
@@ -68,8 +48,34 @@
       which we all know and love. We want to empower learners of all ages and backgrounds to discover the thrill of
       coding and inspire the problem-solvers, innovators, and creators of tomorrow. Join us on this exciting journey of
       exploration, where learning to code becomes an adventure, and anyone can unlock their potential in the world of
-      technology.</p7>
+      technology.</p>
   </div>
+
+  
+  <div class="Other-Challenges">
+    <p class="about-header Other-Challenges-Header">Other Challenges</p>
+    <div class="resource">
+      <a href="https://codingfantasy.com/" target="_blank">
+        <img class="image-hover" src="images/codingfantasy.png" alt="HTML Challenge">
+      </a>
+      <a class="HTML" href="https://codingfantasy.com/" target="_blank">Learn HTML</a>
+    </div>
+    <div class="resource">
+      <a href="https://flukeout.github.io/" target="_blank" >
+        <img class="image-hover" src="images/cssdiner.jpg" alt="CSS Challenge">
+      </a>
+      <a class="CSS" href="https://flukeout.github.io/" target="_blank">Learn CSS</a>
+
+    </div>
+    <div class="resource">
+      <a href="https://codecombat.com/" target="_blank">
+        <img class="image-hover" src="images/CODECOMBAT.jpg" alt="JavaScript Challenge">
+      </a>
+      <a class="Javascript" href="https://codecombat.com/" target="_blank">Learn JS/Python</a>
+    </div>
+  </div>
+</div>
+
 
 </body>
 

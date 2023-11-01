@@ -15,31 +15,30 @@
   <!-- This is the NavBar where users can navigate to different pages -->
   <div class="NavBar header">
     <a href="index.html">
-      <img class="header-logo" src="images/Logo.png">
+      <img class="header-logo" alt="Logo" src="images/Logo.png">
     </a>
 
-    <nav>
-      <li><a class="Log in" href="login.html">Log in</a></li>
-      <li><a class="Sign Up" href="signup.html">Sign up</a></li>
+    <ul class="nav">
+      <li><a class="Log in" href="login.html#login">Log in</a></li>
+      <li><a class="Sign Up" href="login.html#signup">Sign up</a></li>
       <li><a class="About" href="about.html">About</a></li>
 
       <!-- Adding the dropdown menu container -->
       <div class="Menu">
-        <img class="menu-icon" src="images/menu-symbol-of-three-parallel-lines 1.png">
+        <img class="menu-icon" alt="menu-selector" src="images/menu-symbol-of-three-parallel-lines1.png">
         <div class="menu-content">
           <a href="index.html">HTML</a>
           <a href="error.html">CSS</a>
           <a href="error.html">Javascript</a>
         </div>
       </div>
-      </li>
-    </nav>
+    </ul>
   </div>
 
   <!-- This is the Game Window where users will interact with the game and observe the effects of their actions. It is the main focus of the page -->
   <div class="Game-Window" style="background-image: url('images/game-background.jpg');">
-    <img id="SwordItem" class="game-item" src="images/sword-stone.png">
-    <img id="Character" src="images/adventurer-idle-00.png">
+    <img id="SwordItem" class="game-item" alt="Sword" src="images/sword-stone.png">
+    <img id="Character" alt="Adventurer" src="images/adventurer-idle-00.png">
   </div>
 
   <!-- These two are simply empty space to help keep the website less cluttered -->
@@ -58,24 +57,36 @@
       <option value="3" href="level3.html">Level 3 of 10</option>
       <option value="4">Level 4 of 10</option>
       <option value="4">Level 5 of 10</option>
-      <option value="4">Level 6 of10</option>
+      <option value="4">Level 6 of 10</option>
       <option value="4">Level 7 of 10</option>
       <option value="4">Level 8 of 10</option>
       <option value="4">Level 9 of 10</option>
       <option value="4">Level 10 of 10</option>
-      
+
     </select>
-    <p2 class="Instructions"> Welcome to Code Adventure! Learn the basics and components of coding in a quick, simple
-      and fun way.
-    </p2>
+    <p class="Instructions"> Welcome to Code Adventure! Learn the basics and components of coding in a quick, simple
+      and fun way. <br><br> CSS positioning is basic, but the foundation for any website. Help our adventurer claim his
+      sword! The <span class="bold-text">Top</span> and <span class="bold-text">Bottom</span> functions can be used to
+      position an object on a page. Place our adventurer on his sword using the top and bottom functions. <br><br> <span
+        class="bold-text">Information:</span> The Sword is positioned at
+    </p>
   </div>
 
   <!-- This is where users will type their code and check their answer when answering each level -->
   <div class="Code-Input-Box">
     <div class="code-editor">
       <!--<pre class="code-input" contenteditable="true"></pre>-->
-      <textarea class="code-input" placeholder="/*Enter your code here*/"></textarea>
+      <textarea class="code-input" placeholder="/*Enter your code here*/">
+#Character { 
+position: relative;
+top: 
+left: 
+}</textarea>
       <button class="Submit">Submit</button>
+    </div>
+    <div class="context-images">
+      <img id="context-html" alt="Code-Context" src="images/codecontextHTML.PNG">
+      <img id="context-css" alt="Code-Context" src="images/codecontextCSS.PNG">
     </div>
   </div>
 

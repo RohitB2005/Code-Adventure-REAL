@@ -1,0 +1,212 @@
+/* Apply styles to the navbar links */
+.NavBar a {
+  font-family: 'Jost', sans-serif;
+  font-size: 1vw;
+  text-decoration: none;
+  color: white;
+}
+
+/* Add hover effect to navbar links */
+.nav a:hover {
+  text-decoration: underline;
+  color: #B0B0B0;
+}
+
+/* Apply styles to navbar container */
+.nav {
+  display: flex;
+  justify-content: space-between;
+  width: 22vw;
+  list-style: none;
+  align-items: center;
+  z-index: 999;
+  margin-right: 1vw;
+}
+
+
+/* Apply styles to header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  height: 8vh;
+  background-color: black;
+}
+
+/* Add transition effect to the logo */
+.header-logo {
+  transition: transform 0.2s ease;
+  height: 100%;
+}
+
+/* Apply hover effect to the logo */
+.header-logo:hover {
+  transform: scale(1.1);
+}
+
+
+
+
+
+/* Container to position the dropdown menu */
+.Menu {
+  position: relative;
+  display: inline-block;
+}
+
+/* Adding animation to dropdown menu */
+.menu-content {
+  display: none;
+  position: absolute;
+  background-color: #636262;
+  border-radius: 20px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  right: 0vw;
+  animation: slide-down 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
+  transform-origin: top center;
+  transform: scaleY(0);
+}
+
+/* Defining the animation */
+@keyframes slide-down {
+  0% {
+    transform: scaleY(0);
+    opacity: 0;
+  }
+
+  100% {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+}
+
+/* Buttons/links inside the dropdown menu */
+.menu-content a {
+  color: white;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+
+}
+
+/* Hover effect for buttons in dropdown menu */
+.menu-content a:hover {
+  text-decoration: underline;
+  background-color: grey;
+  border-radius: 20px;
+}
+
+/* Show the dropdown menu on hover */
+.Menu:hover .menu-content {
+  display: block;
+}
+
+
+.Gif-Banner {
+  position: relative;
+  image-rendering: pixelated;
+  width: 100%;
+  height: 31.5vh;
+}
+
+.Gif-Banner-Image {
+  image-rendering: pixelated;
+  width: 100%;
+  max-height: 100%;
+  object-fit: fill;
+}
+
+.About-Us {
+  position: relative;
+  bottom: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.about-page-content {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.about-page-content>div {
+  max-width: 40%;
+}
+
+
+.Other-Challenges-Header {
+  text-align: center;
+}
+
+.Other-Challenges {
+  font-family: 'Jost', sans-serif;
+  font-size: 1.7vw;
+  color: white;
+  text-decoration: underline;
+  line-height: 3vw;
+}
+
+.Other-Challenges .resource>a {
+  width: 30%;
+}
+
+.Other-Challenges a {
+  text-decoration: none;
+  color: white;
+}
+
+.HTML:hover {
+  color: #c5c8c6;
+  text-decoration: underline;
+}
+
+.CSS:hover {
+  color: #c5c8c6;
+  text-decoration: underline;
+}
+
+.Javascript:hover {
+  color: #c5c8c6;
+  text-decoration: underline;
+}
+
+.Challenge-Images {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+.image-hover{
+  transition: transform 0.2s ease;
+}
+.image-hover:hover{
+  transform: scale(1.1);
+}
+
+.resource {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+a img {
+  max-width: 100%;
+  min-width: 100%;
+  /* Ensure the image does not exceed its original width */
+  height: auto;
+  /* Maintain aspect ratio */
+}
+
+
+.about-header {
+  font-family: 'Jost', sans-serif;
+  font-size: 2vw;
+  color: white;
+  text-decoration: underline;
+}
+
+.Our-Purpose-Paragraph {
+  font-family: 'Jost', sans-serif;
+  font-size: 1vw;
+  color: white;
+  max-width: 75%; */
+}
