@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
   <title>Code Adventure</title>
-  <link href="style.css" rel="stylesheet" type="text/css">
+  <link href="style_level2.css" rel="stylesheet" type="text/css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Jost">
 </head>
 
@@ -36,10 +36,9 @@
   </div>
 
   <!-- This is the Game Window where users will interact with the game and observe the effects of their actions. It is the main focus of the page -->
-  <div class="Game-Window" style="background-image: url('images/game-background.jpg');">
-    <img id="SwordItem" class="game-item" alt="Sword" src="images/sword-stone.png">
-    <img id="Character" alt="Adventurer" src="images/adventurer-idle-00.png">
+  <div class="Game-Window" style="background-image: url('images/dungeonbackground.PNG');">
   </div>
+  <img id="Character" alt="Adventurer" src="images/idle-sword-hand-1.png">
 
   <!-- These two are simply empty space to help keep the website less cluttered -->
   <div class="Empty-Space">
@@ -52,8 +51,8 @@
   <div class="Instructions-Level">
     <!--Option values within select class, and defining class selected for this page-->
     <select class="lesson-selector" id="lesson-select">
-      <option value="1" selected>Level 1 of 10</option>
-      <option value="2">Level 2 of 10</option>
+      <option value="1">Level 1 of 10</option>
+      <option value="2" selected>Level 2 of 10</option>
       <option value="3">Level 3 of 10</option>
       <option value="4">Level 4 of 10</option>
       <option value="4">Level 5 of 10</option>
@@ -64,10 +63,7 @@
       <option value="4">Level 10 of 10</option>
 
     </select>
-    <p class="Instructions"> Welcome to Code Adventure! In this challenge, learn the basics and components of CSS in a quick, simple
-      and fun way. <br><br> CSS positioning is basic, but the foundation for any website. Help our adventurer claim his
-      sword! The <span class="bold-text">Top</span> and <span class="bold-text">Left</span> functions can be used to
-      position an object on a page. Place our adventurer on his sword using the top and left functions.
+    <p class="Instructions"> Congratulations on claiming our adventurer's sword! <br><br> Unfortunately, our adventurer has been captured for taking the sword from its stone. The <span class="bold-text">Z-Index</span> function can be used to change the layer an object is on. Help break our adventurer out of jail, and use this function to place him on the layer above the cage.
     </p>
   </div>
 
@@ -75,18 +71,17 @@
   <div class="Code-Input-Box">
     <div class="code-editor">
       <textarea class="code-input" placeholder="/*Enter your code here*/">
-#Character { 
-position: relative;
-top: 
-left: 
+#Character {
+position: absolute;
+z-index: 
 }</textarea>
       <button class="Submit">Submit</button>
-      <a href="level2.html" <button class="NextLevel" style="display: none;">Next Level</button></a>
+      <a href="error.html" <button class="NextLevel" style="display: none;">Next Level</button></a>
     </div>
   </div>
 
 
-  <script src="script.js"></script>
+  <script src="level2.js"></script>
 
 </body>
 
