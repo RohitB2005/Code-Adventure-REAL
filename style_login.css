@@ -114,8 +114,8 @@ body {
 }
 
 .container {
-  height: 45vh;
-  width: 22.5vw;
+  height: 47vh;
+  width: 23.5vw;
   border-radius: 10px;
   background-color: #313131;
   color: white;
@@ -217,4 +217,5 @@ button:hover {
 .form-logo{
   width: 5vw;
   height: auto;
+  image-rendering:optimizeQuality;
 }

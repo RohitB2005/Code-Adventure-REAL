@@ -22,7 +22,8 @@ document.getElementById("lesson-select").addEventListener("change", function () 
   }
 });
 
-const expectedProperties = ["#character {", "position: absolute;", "z-index: 1;", "}"]; /* Store each necessary part of the answer in an array */
+
+const expectedProperties = ["#character {", "position: absolute;", /z-index: [1-9][0-9]*;/, "}"]; /* Store each necessary part of the answer in an array */
 
 const submitButton = document.querySelector(".Submit"); /* Setting the submit button to relay to check the code */
 
@@ -30,11 +31,31 @@ const nextLevelButton = document.querySelector(".NextLevel");
 
 const character = document.getElementById("Character");
 
+const showAnswerButton = document.getElementById("showAnswerButton");
+
+showAnswerButton.addEventListener("click", () => {
+  /* Get/relate to the code editor element */
+  const codeInput = document.querySelector(".code-input");
+
+  /* Set the correct answer into the textarea, in this case 1, although any positive integer>0 is still correct */
+   codeInput.value = `#character {\nposition: absolute;\nz-index: 1;\n}`;
+  });
+
 
 submitButton.addEventListener("click", checkAnswer); /* Runs function when submit button clicked*/
 
 function checkAnswer() {
   const userAnswer = document.querySelector(".code-input").value.toLowerCase(); /* Convert user answer to lower case, avoiding case sensitivity */
+
+
+  /* Setting valid characters to not be flagged as invalid */
+  const validCharactersPattern = /^[a-zA-Z0-9\s.,;:'"!@#$%^&*()-_=+<>?/\\[\]{}|`~]+$/;
+
+  /* Check if the answer contains any invalid characters */
+  if (!validCharactersPattern.test(userAnswer)) {
+    alert("Invalid characters, like emojis, are not allowed in your answer.");
+    return;
+  }
 
   /* Setting boundaries(max and min characters) so users know how much to write */
   if (userAnswer.length > 100) {
@@ -47,8 +68,13 @@ function checkAnswer() {
     return;
   }
 
-  /* Check if all expected properties and values are present in the user's answer */
-  const allPropertiesPresent = expectedProperties.every(property => userAnswer.includes(property));
+  /* Check if all expected properties and values are present in the user's answer. Test if the user's z-index value is an integer>0 to flag as correct */
+  const allPropertiesPresent = expectedProperties.every(property => {
+    if (property instanceof RegExp) {
+      return property.test(userAnswer);
+    }
+    return userAnswer.includes(property);
+  });
 
   /* When a users answer does not incldue all expected properties, display an incorrect message, and if matchng, display correct message */
   if (allPropertiesPresent) {
@@ -67,6 +93,20 @@ function checkAnswer() {
       nextLevelButton.style.display = "block";
       nextLevelButton.style.marginLeft = "78%"
     }, 5000);
+
+    const user = auth.currentUser; // Get the current user
+    if (user) {
+      const userDocRef = doc(db, "users", user.uid);
+
+      // Update the user's last level to 3 (or the next level they are going to)
+      setDoc(userDocRef, { lastLevel: 3 })
+        .then(() => {
+          console.log("User's last level updated to 3");
+        })
+        .catch((error) => {
+          console.error("Error updating last level:", error);
+        });
+    }
   } else {
     submitButton.style.backgroundColor = "red";
     submitButton.textContent = "Incorrect"; /* Revert the button to its original state after 2 seconds */

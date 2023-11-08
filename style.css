@@ -7,7 +7,6 @@
   width: 50%;
   height: 56vh;
   z-index: 1;
-  background-repeat: none;
   background-position: center;
   background-size: cover;
   image-rendering: pixelated;
@@ -129,11 +128,27 @@
 }
 
 
-.context-images{
-  position: relative;
+.contextCSS{
+  position: absolute;
+  top: 2.5vh;
+  right: 10.5vw;
+  width: 24%;
+  border-radius: 7px;
 }
 
+#showAnswerButton{
+  font-size: 0.8vw;
+  background: none;
+  border: none;
+  color: grey;
+  text-decoration: underline;
+  cursor: pointer;
+  margin-left: 2%;
+}
 
+#showAnswerButton:hover{
+  color: lightgrey;
+}
 
 .Code-Input-Box {
   position: absolute;
@@ -145,9 +160,6 @@
   margin-left: 2%;
   right: 0.75%;
 }
-
-
-
 
 /* Apply styles to the navbar links */
 .NavBar a {

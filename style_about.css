@@ -105,7 +105,7 @@
   position: relative;
   image-rendering: pixelated;
   width: 100%;
-  height: 31.5vh;
+  height: 31vh;
 }
 
 .Gif-Banner-Image {
@@ -208,5 +208,5 @@ a img {
   font-family: 'Jost', sans-serif;
   font-size: 1vw;
   color: white;
-  max-width: 75%; */
+  max-width: 75%; 
 }

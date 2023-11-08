@@ -1,9 +1,10 @@
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
   <title>Login/Signup</title>
-  <link rel="stylesheet" href="style_login.css" />
-  <script src="./login.js"></script>
+  <link rel="stylesheet" href="style_login.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Jost">
 </head>
 
@@ -15,22 +16,23 @@
       <img class="header-logo" alt="Logo" src="images/Logo.png">
     </a>
 
-    <ul class="nav">
-      <li><a class="Log in" href="login.html#login">Log in</a></li>
-      <li><a class="Sign Up" href="login.html#signup">Sign up</a></li>
-      <li><a class="About" href="about.html">About</a></li>
+    <div class="nav">
+      <a style="display: none;" id="logout" href="#">Logout</a>
+        <a class="Log in" id="login-link" href="login.html#login">Log in</a>
+        <a class="Sign Up" id="signup-link" href="login.html#signup">Sign up</a>
+        <a class="About" href="about.html">About</a>
 
-      <!-- Adding the dropdown menu container -->
-      <div class="Menu">
-        <img class="menu-icon" alt="menu-selector" src="images/menu-symbol-of-three-parallel-lines1.png">
-        <div class="menu-content">
-          <a href="error.html">HTML</a>
-          <a href="index.html">CSS</a>
-          <a href="error.html">Javascript</a>
+        <!-- Adding the dropdown menu container -->
+        <div class="Menu">
+          <img class="menu-icon" alt="menu-selector" src="images/menu-symbol-of-three-parallel-lines1.png">
+          <div class="menu-content">
+            <a href="error.html">HTML</a>
+            <a href="index.html">CSS</a>
+            <a href="error.html">Javascript</a>
+          </div>
         </div>
       </div>
-    </ul>
-  </div>
+    </div>
 
   <div class="container display-flex columns center">
     <div class="display-flex" id="tabs">
@@ -40,23 +42,22 @@
     </div>
     <div class="form-section flex">
       <div class="login display-flex columns center" id="login">
-        <input type="username" id="login-username" placeholder="Username" />
-        <input type="password" id="login-password" placeholder="Password" />
-        <p><a href="#">Forgot your username/password?</a></p>
+        <input type="email" id="login-email" placeholder="Email">
+        <input type="password" id="login-password" placeholder="Password">
+        <p><a href="#">Forgot your email/password?</a></p>
         <button class="login-signup-button" id="login-button">Login</button>
         <img class="form-logo" alt="form-logo" src="images/Logo.png">
       </div>
 
       <div class="signup display-flex columns center" id="signup">
-        <input type="email" id="signup-email" placeholder="Email" />
-        <input type="text" id="signup-username" placeholder="Username" />
-        <input type="password" id="signup-password" placeholder="Password" />
-        <button class="login-signup-button" id="signup-button">sign up</button>
+        <input type="email" id="signup-email" placeholder="Email">
+        <input type="password" id="signup-password" placeholder="Password">
+        <button class="login-signup-button" id="signup-button">Sign up</button>
         <img class="form-logo" alt="form-logo" src="images/Logo.png">
       </div>
     </div>
-  </div <script src="loginapi.js">
-  </script>
+  </div> 
 </body>
-
+  <script type="module" src="auth.js"></script>
+  <script src="login.js"></script>
 </html>

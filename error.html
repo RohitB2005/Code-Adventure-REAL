@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
   <meta charset="utf-8">
@@ -18,10 +18,11 @@
       <img class="header-logo" alt="Logo" src="images/Logo.png">
     </a>
 
-    <ul class="nav">
-      <li><a class="Log in" href="login.html#login">Log in</a></li>
-      <li><a class="Sign Up" href="login.html#signup">Sign up</a></li>
-      <li><a class="About" href="about.html">About</a></li>
+    <div class="nav">
+      <a style="display: none;" id="logout" href="#">Logout</a>
+      <a class="Log in" id="login-link" href="login.html#login">Log in</a>
+      <a class="Sign Up" id="signup-link" href="login.html#signup">Sign up</a>
+      <a class="About" href="about.html">About</a>
 
       <!-- Adding the dropdown menu container -->
       <div class="Menu">
@@ -32,12 +33,15 @@
           <a href="error.html">Javascript</a>
         </div>
       </div>
-    </ul>
+    </div>
   </div>
 
-  <p3 class="Error-Text">Sorry, this page isn't available yet!</p3>
+  <p class="Error-Text">Sorry, this page isn't available yet!</p>
   <div class="sprite-animation" id="ErrorImage"></div>
-  <a class="Return-Home"href="index.html"><p4>Return to Home</p4></a>
+  <a class="Return-Home" href="index.html">
+    <p>Return to Home</p>
+  </a>
 </body>
+<script type="module" src="auth.js"></script>
 
 </html>

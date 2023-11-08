@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
   <meta charset="utf-8">
@@ -18,10 +18,11 @@
       <img class="header-logo" alt="Logo" src="images/Logo.png">
     </a>
 
-    <ul class="nav">
-      <li><a class="Log in" href="login.html#login">Log in</a></li>
-      <li><a class="Sign Up" href="login.html#signup">Sign up</a></li>
-      <li><a class="About" href="about.html">About</a></li>
+      <div class="nav">
+        <a style="display: none;" id="logout" href="#">Logout</a>
+          <a class="Log in" id="login-link" href="login.html#login">Log in</a>
+          <a class="Sign Up" id="signup-link" href="login.html#signup">Sign up</a>
+          <a class="About" href="about.html">About</a>
 
       <!-- Adding the dropdown menu container -->
       <div class="Menu">
@@ -32,11 +33,11 @@
           <a href="error.html">Javascript</a>
         </div>
       </div>
-    </ul>
+    </div>
   </div>
 
   <!-- This is the Game Window where users will interact with the game and observe the effects of their actions. It is the main focus of the page -->
-  <div class="Game-Window" style="background-image: url('images/game-background.jpg');">
+  <div class="Game-Window" style="background-image: url('images/game-background.jpg');" alt="game-background">
     <img id="SwordItem" class="game-item" alt="Sword" src="images/sword-stone.png">
     <img id="Character" alt="Adventurer" src="images/adventurer-idle-00.png">
   </div>
@@ -50,7 +51,7 @@
 
   <!-- This section will present users with instructions, show the model answer, and help relay the story to them -->
   <div class="Instructions-Level">
-    <!--Option values within select class, and defining class selected for this page-->
+    <!--Option values within select class, and defining  class selected for this page-->
     <select class="lesson-selector" id="lesson-select">
       <option value="1" selected>Level 1 of 10</option>
       <option value="2">Level 2 of 10</option>
@@ -66,7 +67,7 @@
     </select>
     <p class="Instructions"> Welcome to Code Adventure! In this challenge, learn the basics and components of CSS in a quick, simple
       and fun way. <br><br> CSS positioning is basic, but the foundation for any website. Help our adventurer claim his
-      sword! The <span class="bold-text">Top</span> and <span class="bold-text">Left</span> functions can be used to
+      sword! The <span class="bold-text">Top, Bottom, Right</span> and <span class="bold-text">Left</span> functions can be used to
       position an object on a page. Place our adventurer on his sword using the top and left functions.
     </p>
   </div>
@@ -81,13 +82,41 @@ top:
 left: 
 }</textarea>
       <button class="Submit">Submit</button>
-      <a href="level2.html" <button class="NextLevel" style="display: none;">Next Level</button></a>
+      <a href="level2.html" class="NextLevel" style="display: none;">Next Level</a>
+    </div>
+    <button id="showAnswerButton">Show Answer</button>
+    <img class="contextCSS" src="images/codecontextCSS.PNG" alt="code-context">
+      </div>
     </div>
   </div>
-
-
-  <script src="script.js"></script>
-
 </body>
+  <script src="script.js"></script>
+  <script type="module" src="auth.js" defer></script>
+  <script type="module">
+    /* Import necessary functions from firebase auth and firestore */
+    import { getAuth, onAuthStateChanged} from "https://www.gstatic.com/firebasejs/10.5.2/firebase-auth.js";
+    import { getFirestore, doc, updateDoc} from "https://www.gstatic.com/firebasejs/10.5.2/firebase-firestore.js";
 
+    const db = getFirestore();
+    const auth = getAuth();
+
+    /* Check if a user is logged in */
+    auth.onAuthStateChanged(function (user) {
+      if (user) {
+        /* Get the user's unique ID */
+        const userUID = user.uid;
+        /* Reference to users document in firebase */
+        const userDocRef = doc(db, "users", userUID);
+
+        /* Update the user's last level in Firestore to current level */
+        updateDoc(userDocRef, { lastLevel: 1 })
+          .then(() => {
+            console.log("Last level updated in Firestore."); /* Alert showing update in db */
+          })
+          .catch((error) => {
+            console.error("Error updating last level in Firestore:", error);
+          });
+      }
+    });
+  </script>
 </html>

@@ -6,11 +6,32 @@ const nextLevelButton = document.querySelector(".NextLevel");
 
 const character = document.getElementById("Character");
 
+const showAnswerButton = document.getElementById("showAnswerButton");
+
+showAnswerButton.addEventListener("click", () => {
+  /* Get/relate to the code editor element */
+  const codeInput = document.querySelector(".code-input");
+
+  /* Set the correct answer into the textarea */
+  codeInput.value = expectedProperties.join("\n");
+});
+
+
 
 submitButton.addEventListener("click", checkAnswer); /* Runs function when submit button clicked*/
 
 function checkAnswer() {
   const userAnswer = document.querySelector(".code-input").value.toLowerCase(); /* Convert user answer to lower case, avoiding case sensitivity */
+
+  /* Setting valid characters to not be flagged as invalid */
+  const validCharactersPattern = /^[a-zA-Z0-9\s.,;:'"!@#$%^&*()-_=+<>?/\\[\]{}|`~]+$/;
+
+  /* Check if the answer contains any invalid characters */
+  if (!validCharactersPattern.test(userAnswer)) {
+    alert("Invalid characters, like emojis, are not allowed in your answer.");
+    return;
+  }
+  
 
   /* Setting boundaries(max and min characters) so users know how much to write */
   if (userAnswer.length > 100) {

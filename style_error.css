@@ -107,7 +107,7 @@
   font-size: 4vw;
   text-align: center;
   color: white;
-  top: 15%;
+  top: 10%;
   left: 50%;
   min-width: 100%;
   transform: translateX(-50%);
@@ -121,7 +121,7 @@
   font-size: 4vw;
   text-align: center;
   color: white;
-  top: 65%;
+  top: 60%;
   left: 50%;
   transform: translateX(-50%);
 }

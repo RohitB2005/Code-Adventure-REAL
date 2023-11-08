@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
   <meta charset="utf-8">
@@ -16,10 +16,11 @@
       <img class="header-logo" alt="Logo" src="images/Logo.png">
     </a>
 
-    <ul class="nav">
-      <li><a class="Log in" href="login.html#login">Log in</a></li>
-      <li><a class="Sign Up" href="login.html#signup">Sign up</a></li>
-      <li><a class="About" href="about.html">About</a></li>
+    <div class="nav">
+      <a style="display: none;" id="logout" href="#">Logout</a>
+      <a class="Log in" id="login-link" href="login.html#login">Log in</a>
+      <a class="Sign Up" id="signup-link" href="login.html#signup">Sign up</a>
+      <a class="About" href="about.html">About</a>
 
       <!-- Adding the dropdown menu container -->
       <div class="Menu">
@@ -30,53 +31,55 @@
           <a href="error.html">Javascript</a>
         </div>
       </div>
-    </ul>
+    </div>
   </div>
 
   <div class="Gif-Banner">
-    <img class="Gif-Banner-Image" src="images/about-gif.gif">
-    <img class="About-Us" src="images/About Us.png">
+    <img class="Gif-Banner-Image" src="images/about-gif.gif" alt="Gif-Banner">
+    <img class="About-Us" src="images/AboutUs.png" alt="About-Text">
   </div>
-<div class="about-page-content">
-  <div class="Our-Purpose">
-    <p class="about-header Our-Purpose-Title">Our Purpose</p>
-    <p class="Our-Purpose-Paragraph">Code Adventure's purpose is to make learning the fundamentals of coding an
-      engaging and enjoyable experience. We believe that coding is a vital skill in today's digital world, and we're
-      committed to breaking down the barriers that can make it seem intimidating and off-putting to so many people.
-      Although our website is in progress and being updated and improved each day, our mission is to provide users with
-      a fun and interactive way to grasp the essentials of coding, with a spark of creativity, in the form of the games
-      which we all know and love. We want to empower learners of all ages and backgrounds to discover the thrill of
-      coding and inspire the problem-solvers, innovators, and creators of tomorrow. Join us on this exciting journey of
-      exploration, where learning to code becomes an adventure, and anyone can unlock their potential in the world of
-      technology.</p>
+  <div class="about-page-content">
+    <div class="Our-Purpose">
+      <p class="about-header Our-Purpose-Title">Our Purpose</p>
+      <p class="Our-Purpose-Paragraph">Code Adventure's purpose is to make learning the fundamentals of coding an
+        engaging and enjoyable experience. We believe that coding is a vital skill in today's digital world, and we're
+        committed to breaking down the barriers that can make it seem intimidating and off-putting to so many people.
+        Although our website is in progress and being updated and improved each day, our mission is to provide users
+        with
+        a fun and interactive way to grasp the essentials of coding, with a spark of creativity, in the form of the
+        games
+        which we all know and love. We want to empower learners of all ages and backgrounds to discover the thrill of
+        coding and inspire the problem-solvers, innovators, and creators of tomorrow. Join us on this exciting journey
+        of
+        exploration, where learning to code becomes an adventure, and anyone can unlock their potential in the world of
+        technology.</p>
+    </div>
+
+
+    <div class="Other-Challenges">
+      <p class="about-header Other-Challenges-Header">Other Challenges</p>
+      <div class="resource">
+        <a href="https://codingfantasy.com/" target="_blank">
+          <img class="image-hover" src="images/codingfantasy.png" alt="HTML Challenge">
+        </a>
+        <a class="HTML" href="https://codingfantasy.com/" target="_blank">Learn HTML</a>
+      </div>
+      <div class="resource">
+        <a href="https://flukeout.github.io/" target="_blank">
+          <img class="image-hover" src="images/cssdiner.jpg" alt="CSS Challenge">
+        </a>
+        <a class="CSS" href="https://flukeout.github.io/" target="_blank">Learn CSS</a>
+
+      </div>
+      <div class="resource">
+        <a href="https://codecombat.com/" target="_blank">
+          <img class="image-hover" src="images/CODECOMBAT.jpg" alt="JavaScript Challenge">
+        </a>
+        <a class="Javascript" href="https://codecombat.com/" target="_blank">Learn JS/Python</a>
+      </div>
+    </div>
   </div>
-
-  
-  <div class="Other-Challenges">
-    <p class="about-header Other-Challenges-Header">Other Challenges</p>
-    <div class="resource">
-      <a href="https://codingfantasy.com/" target="_blank">
-        <img class="image-hover" src="images/codingfantasy.png" alt="HTML Challenge">
-      </a>
-      <a class="HTML" href="https://codingfantasy.com/" target="_blank">Learn HTML</a>
-    </div>
-    <div class="resource">
-      <a href="https://flukeout.github.io/" target="_blank" >
-        <img class="image-hover" src="images/cssdiner.jpg" alt="CSS Challenge">
-      </a>
-      <a class="CSS" href="https://flukeout.github.io/" target="_blank">Learn CSS</a>
-
-    </div>
-    <div class="resource">
-      <a href="https://codecombat.com/" target="_blank">
-        <img class="image-hover" src="images/CODECOMBAT.jpg" alt="JavaScript Challenge">
-      </a>
-      <a class="Javascript" href="https://codecombat.com/" target="_blank">Learn JS/Python</a>
-    </div>
-  </div>
-</div>
-
-
 </body>
+<script type="module" src="auth.js"></script>
 
 </html>

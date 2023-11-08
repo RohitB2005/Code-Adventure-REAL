@@ -7,7 +7,6 @@
   width: 50%;
   height: 56vh;
   z-index: 1;
-  background-repeat: none;
   background-position: center;
   background-size:contain;
   image-rendering: pixelated;
@@ -128,8 +127,12 @@
   cursor: pointer;
 }
 
-.context-images{
-  position: relative;
+.contextCSS2{
+  position: absolute;
+  top: 2.4vh;
+  border-radius: 7px;
+  right: 11vw;
+  width: 23%;
 }
 
 
@@ -145,8 +148,19 @@
   right: 0.75%;
 }
 
+#showAnswerButton{
+  font-size: 0.8vw;
+  background: none;
+  border: none;
+  color: grey;
+  text-decoration: underline;
+  cursor: pointer;
+  margin-left: 2%;
+}
 
-
+#showAnswerButton:hover{
+  color: lightgrey;
+}
 
 /* Apply styles to the navbar links */
 .NavBar a {
