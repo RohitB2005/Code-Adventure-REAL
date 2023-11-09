@@ -65,7 +65,7 @@
 
     </select>
     <p class="Instructions"> Congratulations on claiming our adventurer's sword! <br><br> Unfortunately, our adventurer
-      has been captured for taking the sword from its stone. The <span class="bold-text">Z-Index</span> function can be
+      has been captured for taking the sword from its stone. <br><br>The <span class="bold-text">Z-Index</span> function can be
       used to change the layer an object is on. Help break our adventurer out of jail, and use this function to place
       him on the layer above the cage.
     </p>
@@ -91,29 +91,34 @@ z-index:
   <script type="module">
     /* Import necessary functions from firebase auth and firestore */
     import { getAuth, onAuthStateChanged} from "https://www.gstatic.com/firebasejs/10.5.2/firebase-auth.js";
-    import { getFirestore, doc, updateDoc} from "https://www.gstatic.com/firebasejs/10.5.2/firebase-firestore.js";
+    import { getFirestore, doc, updateDoc, getDoc} from "https://www.gstatic.com/firebasejs/10.5.2/firebase-firestore.js";
 
     const db = getFirestore();
     const auth = getAuth();
 
     /* Check if a user is logged in */
-    auth.onAuthStateChanged(function (user) {
-      if (user) {
-        /* Get the user's unique ID */
-        const userUID = user.uid;
-        /* Reference to users document in firebase */
-        const userDocRef = doc(db, "users", userUID);
+        auth.onAuthStateChanged(async function (user) {
+            if (user) {
+                /* Get the user's unique ID */
+                const userUID = user.uid;
+                /* Reference to users document in firebase */
+                const userDocRef = doc(db, "users", userUID);
 
-        /* Update the user's last level in Firestore to current level */
-        updateDoc(userDocRef, { lastLevel: 2 })
-          .then(() => {
-            console.log("Last level updated in Firestore."); /* Alert showing update in db */
-          })
-          .catch((error) => {
-            console.error("Error updating last level in Firestore:", error);
-          });
-      }
-    });
-  </script>
+                try {
+                    /* Check the user's last level from Firestore database */
+                    const userDoc = await getDoc(userDocRef);
+                    const currentLastLevel = userDoc.data()?.lastLevel || 1; /* Default to 1 if no level is found */
+
+                    /* Update the user's last level in Firestore only if the new level is higher */
+                    if (currentLastLevel < 2) {
+                        updateDoc(userDocRef, { lastLevel: 2 });
+                        console.log("User's last level updated in Firestore.");
+                    }
+                } catch (error) {
+                    console.error("Error updating last level in Firestore:", error);
+                }
+            }
+        });
+    </script>
 
 </html>

@@ -52,14 +52,14 @@ document.getElementById("signup-button").addEventListener("click", function() {
   var signupEmail = document.getElementById("signup-email").value;
   var signupPassword = document.getElementById("signup-password").value;
 
-// In the registration code
+/* In the registration code */
 createUserWithEmailAndPassword(auth, signupEmail, signupPassword)
   .then((userCredential) => {
-    // Signed in
+    /* Signed in */
     const user = userCredential.user;
     const userDocRef = doc(db, "users", user.uid);
 
-    // Initialize the user's last level as 1
+    /* Initialize the user's last level as 1 */
     setDoc(userDocRef, { lastLevel: 1 });
 
     alert(`${user.email}, Welcome to Code Adventure! You are currently up to level 1.`);
