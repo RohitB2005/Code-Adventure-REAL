@@ -66,7 +66,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     document.getElementById("lesson-select").addEventListener("change", function () {
         var selectedValue = this.value;
-        var pageURLs = { "1": "index.html", "2": "level2.html", "3": "level3.html", "4": "level4.html"};
+        var pageURLs = { "1": "index.html", "2": "level2.html", "3": "level3.html", "4": "level4.html", "5": "level5.html", "6": "error.html"};
         if (pageURLs[selectedValue]) {
             window.location.href = pageURLs[selectedValue];
         }

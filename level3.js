@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const userAnswer = document.querySelector(".code-input").value.toLowerCase().replace(/\s/g, '');
         
 
-        const isCorrect = userAnswer.includes("#hidden-passage{") && userAnswer.includes("display:block");
+        const isCorrect = userAnswer.includes("#hidden-passage{") && userAnswer.includes("display:block;");
 
         if (isCorrect) {
             alert("Correct answer! The exit has been revealed.");
@@ -63,7 +63,9 @@ document.addEventListener("DOMContentLoaded", () => {
             "1": "index.html", 
             "2": "level2.html", 
             "3": "level3.html", 
-            "4": "level4.html"
+            "4": "level4.html",
+            "5": "level5.html",
+            "6": "error.html"
         };
         if (pageURLs[selectedValue]) {
             window.location.href = pageURLs[selectedValue];

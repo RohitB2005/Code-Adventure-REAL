@@ -2,7 +2,7 @@ import { auth, db } from './firebase-config.js';
 import { doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-firestore.js";
 
 document.addEventListener("DOMContentLoaded", () => {
-    const expectedAnswer = "transform:rotate(-90deg)";
+    const expectedAnswer = "transform:rotate(-90deg);";
     
     const submitButton = document.querySelector(".Submit");
     const nextLevelButton = document.querySelector(".NextLevel");
@@ -95,7 +95,9 @@ document.addEventListener("DOMContentLoaded", () => {
             "1": "index.html", 
             "2": "level2.html", 
             "3": "level3.html", 
-            "4": "level4.html"
+            "4": "level4.html",
+            "5": "level5.html",
+            "6": "error.html"
         };
         if (pageURLs[selectedValue]) {
             window.location.href = pageURLs[selectedValue];
