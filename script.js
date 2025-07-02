@@ -1,5 +1,4 @@
 import { auth, db } from './firebase-config.js';
-// THE FIX: Import setDoc instead of updateDoc
 import { doc, setDoc } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-firestore.js";
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -25,7 +24,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 const user = auth.currentUser;
                 if (user) {
                     const userDocRef = doc(db, "users", user.uid);
-                    // THE FIX: Use setDoc with merge to create or update the document.
                     await setDoc(userDocRef, { lastLevel: 2 }, { merge: true });
                     console.log("Progress saved! Level 2 is now unlocked.");
                 }
@@ -35,7 +33,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 return;
             }
 
-            // This code now only runs AFTER the database is safely updated.
             character.style.top = "63%";
             character.style.left = "62%";
             character.style.animation = "moveCharacter 2s linear, characterAnimation 0.5s steps(1) 4";
@@ -63,7 +60,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     document.getElementById("lesson-select").addEventListener("change", function () {
         var selectedValue = this.value;
-        var pageURLs = { "1": "index.html", "2": "level2.html", "3": "error.html"};
+        var pageURLs = { "1": "index.html", "2": "level2.html", "3": "level3.html"};
         if (pageURLs[selectedValue]) { window.location.href = pageURLs[selectedValue]; }
     });
 });

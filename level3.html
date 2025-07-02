@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Code Adventure - Level 3</title>
+  <link href="style_level3.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Jost">
+</head>
+
+<body style="background-color: #181D2E;margin:0;">
+
+  <div class="NavBar header">
+    <a href="index.html">
+      <img class="header-logo" alt="Logo" src="images/Logo.png">
+    </a>
+    <div class="nav">
+      <a style="display: none;" id="logout" href="#">Logout</a>
+      <a class="Log in" id="login-link" href="login.html#login">Log in</a>
+      <a class="Sign Up" id="signup-link" href="login.html#signup">Sign up</a>
+      <a class="About" href="about.html">About</a>
+      <div class="Menu">
+        <img class="menu-icon" alt="menu-selector" src="images/menu-symbol-of-three-parallel-lines1.png">
+        <div class="menu-content">
+          <a href="error.html">HTML</a>
+          <a href="index.html">CSS</a>
+          <a href="error.html">Javascript</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="Game-Window" style="background-image: url('images/level3-background.png');">
+    <img id="Character" alt="Adventurer" src="images/idle-sword-hand-1.png">
+    <img id="hidden-passage" alt="A secret stone door" src="images/secret-door.png">
+  </div>
+
+  <div class="Empty-Space"></div>
+  <div class="Empty-Space-2"></div>
+
+  <div class="Instructions-Level">
+    <select class="lesson-selector" id="lesson-select">
+      <option value="1">Level 1 of 10</option>
+      <option value="2">Level 2 of 10</option>
+      <option value="3" selected>Level 3 of 10</option>
+      <option value="4">Level 4 of 10</option>
+      <option value="5">Level 5 of 10</option>
+      <option value="6">Level 6 of 10</option>
+      <option value="7">Level 7 of 10</option>
+      <option value="8">Level 8 of 10</option>
+      <option value="9">Level 9 of 10</option>
+      <option value="10">Level 10 of 10</option>
+    </select>
+    <!-- UPDATE YOUR INSTRUCTIONS FOR LEVEL 3 -->
+    <p class="Instructions">
+        You've escaped the cage, but now you're in a dead-end corridor. Or is it?
+        <br><br>
+        In CSS, the <span class="bold-text">display</span> property is crucial. Setting it to <span class="bold-text">none</span> makes an element completely disappear. To make it visible again, you can set it to <span class="bold-text">block</span>.
+        <br><br>
+        There must be a secret door. Find the element with the ID <span class="bold-text">#hidden-passage</span> and make it appear!
+      </p>
+  </div>
+
+  <div class="Code-Input-Box">
+    <div class="code-editor">
+      <!-- UPDATE THE STARTER CODE FOR LEVEL 3 -->
+      <textarea class="code-input" placeholder="/*Enter your code here*/">
+#hidden-passage {
+  display: 
+}
+      </textarea>
+      <button class="Submit">Submit</button>
+      <a href="level4.html" class="NextLevel" style="display: none;">Next Level</a>
+    </div>
+    <button id="showAnswerButton">Show Answer</button>
+    <img class="contextCSS2" src="images/contextCSS3.PNG" alt="context-image">
+  </div>
+
+</body>
+<script type="module" src="level3.js"></script>
+<script type="module" src="auth.js"></script>
+<script type="module">
+  import { auth, db } from './firebase-config.js';
+  import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-auth.js";
+  import { doc, getDoc } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-firestore.js";
+
+  const thisLevel = 3;
+
+  function updateUserLevelAccess(unlockedLevel) {
+    const lessonSelect = document.getElementById('lesson-select');
+    if (!lessonSelect) return;
+    const options = lessonSelect.getElementsByTagName('option');
+    for (const option of options) {
+      const levelValue = parseInt(option.value, 10);
+      if (levelValue > unlockedLevel) {
+        option.disabled = true;
+        if (!option.textContent.includes('(Locked)')) {
+          option.textContent += ' (Locked)';
+        }
+        option.style.color = '#888';
+      } else {
+        option.disabled = false;
+        option.textContent = option.textContent.replace(' (Locked)', '');
+        option.style.color = '';
+      }
+    }
+  }
+
+  onAuthStateChanged(auth, async (user) => {
+    if (user) {
+      const userDocRef = doc(db, "users", user.uid);
+      try {
+        const userDoc = await getDoc(userDocRef);
+        const userUnlockedLevel = userDoc.data()?.lastLevel || 1;
+
+        if (thisLevel > userUnlockedLevel) {
+          alert("You haven't unlocked this level yet! Returning to your last level.");
+          const lastLevelPage = userUnlockedLevel === 1 ? 'index.html' : `level${userUnlockedLevel}.html`;
+          window.location.href = lastLevelPage;
+          return;
+        }
+        
+        updateUserLevelAccess(userUnlockedLevel);
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+        window.location.href = 'index.html';
+      }
+    } else {
+      alert("Please log in to access this level.");
+      window.location.href = 'login.html#login';
+    }
+  });
+</script>
+
+</html>

@@ -2,7 +2,8 @@ import { auth, db } from './firebase-config.js';
 import { doc, setDoc } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-firestore.js";
 
 document.addEventListener("DOMContentLoaded", () => {
-    const expectedProperties = ["#character {", "position: absolute;", /z-index: [1-9][0-9]*;/, "}"];
+    const expectedProperties = ["#hidden-passage", "display:block"]; 
+    
     const submitButton = document.querySelector(".Submit");
     const nextLevelButton = document.querySelector(".NextLevel");
     const character = document.getElementById("Character");
@@ -10,25 +11,28 @@ document.addEventListener("DOMContentLoaded", () => {
 
     showAnswerButton.addEventListener("click", () => {
         const codeInput = document.querySelector(".code-input");
-        codeInput.value = `#character {\nposition: absolute;\nz-index: 1;\n}`;
+        codeInput.value = `#Character {\n#hidden-passage {\n  display: block;\n}`;
     });
 
     async function checkAnswer() {
-        const userAnswer = document.querySelector(".code-input").value.toLowerCase();
-        const allPropertiesPresent = expectedProperties.every(property => {
-            if (property instanceof RegExp) return property.test(userAnswer);
-            return userAnswer.includes(property);
-        });
+        const userAnswer = document.querySelector(".code-input").value.toLowerCase().replace(/\s/g, '');
+        
 
-        if (allPropertiesPresent) {
+        const isCorrect = userAnswer.includes("#hidden-passage{") && userAnswer.includes("display:block");
+
+        if (isCorrect) {
             alert("Correct answer!");
+            document.getElementById('hidden-passage').style.display = 'block';
+            const character = document.getElementById("Character");
+            character.style.animation = 
+        `runToDoor 2s ease-in forwards, run-individual-frames 0.6s infinite steps(1)`;
 
             try {
                 const user = auth.currentUser;
                 if (user) {
                     const userDocRef = doc(db, "users", user.uid);
-                    await setDoc(userDocRef, { lastLevel: 3 }, { merge: true });
-                    console.log("Progress saved! Level 3 is now unlocked.");
+                    await setDoc(userDocRef, { lastLevel: 4 }, { merge: true });
+                    console.log("Progress saved! Level 4 is now unlocked.");
                 }
             } catch (error) {
                 console.error("CRITICAL: Failed to save progress!", error);
@@ -36,18 +40,11 @@ document.addEventListener("DOMContentLoaded", () => {
                 return;
             }
             
-            character.style.zIndex = "1";
-            character.style.animation = "moveCharacter 2s linear, characterAttackAnimation 2s steps(1) 2";
-            character.style.animationFillMode = "forwards";
-            character.addEventListener("animationend", () => {
-                character.style.animation = "idle 1.7s steps(1) infinite";
-            });
-
             submitButton.style.display = "none";
             setTimeout(() => {
                 nextLevelButton.style.display = "block";
                 nextLevelButton.style.marginLeft = "78%";
-            }, 5000);
+            }, 3000); 
         } else {
             submitButton.style.backgroundColor = "red";
             submitButton.textContent = "Incorrect";
@@ -62,7 +59,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     document.getElementById("lesson-select").addEventListener("change", function () {
         var selectedValue = this.value;
-        var pageURLs = { "1": "index.html", "2": "level2.html", "3": "level3.html"};
+        var pageURLs = { 
+            "1": "index.html", 
+            "2": "level2.html", 
+            "3": "level3.html", 
+        };
         if (pageURLs[selectedValue]) {
             window.location.href = pageURLs[selectedValue];
         }

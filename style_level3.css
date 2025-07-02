@@ -1,0 +1,116 @@
+.Game-Window {
+    display: flex;
+    position: relative;
+    left: 25%;
+    margin-top: 0.75%;
+    border-radius: 20px;
+    width: 50%;
+    height: 56vh;
+    z-index: 1;
+    background-position: center;
+    background-size:contain;
+    image-rendering: pixelated;
+  }
+  
+  #Character {
+    position: absolute; 
+    image-rendering: pixelated;
+    height: 30%; 
+    width: 20%;
+    top: 50%;
+    left: 40%;
+    z-index: 1;
+    animation-name: idle;
+    animation-duration: 1.7s;
+    animation-iteration-count: infinite;
+    animation-timing-function: steps(6);
+  }
+
+  @keyframes idle {
+    0% {
+      content: url(images/idle-sword-hand-1.png)
+    }
+  
+    25% {
+      content: url(images/idle-sword-hand-2.png)
+    }
+  
+    50% {
+      content: url(images/idle-sword-hand-3.png)
+    }
+  
+    75% {
+      content: url(images/idle-sword-hand-4.png)
+    }
+  
+    100% {
+      content: url(images/idle-sword-hand-1.png)
+    }
+  }
+
+  @keyframes runToDoor {
+    from {
+      transform: scale(1); /* Starts at full size */
+    }
+    to {
+      transform: scale(0); /* Shrinks to nothing */
+      opacity: 0; /* Fades out completely */
+    }
+  }
+  
+  @keyframes run-individual-frames {
+    0%   { content: url('images/adventurer-run-00.png'); }
+    16%  { content: url('images/adventurer-run-01.png'); }
+    33%  { content: url('images/adventurer-run-02.png'); }
+    50%  { content: url('images/adventurer-run-03.png'); }
+    66%  { content: url('images/adventurer-run-04.png'); }
+    83%  { content: url('images/adventurer-run-05.png'); }
+    100% { content: url('images/adventurer-run-00.png'); } /* Loop back to the start frame */
+  }
+  
+  /* Position the door where it should appear, but make it invisible */
+  #hidden-passage {
+    position: absolute;
+    height: 50%;
+    top: 25%;
+    left: 35%;
+    z-index: 0;
+    image-rendering: pixelated;
+    display: none;
+    /* Add a fade in animation for when it appears */
+    animation: fadeIn 1s ease-in;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  
+  .Instructions-Level { display: flex; position: absolute; background-color: #313131; width: 39.25%; height: 32vh; border-radius: 20px; margin-top: 0.75%; margin-left: 0.75%; font-family: 'Jost', sans-serif; color: white;}
+  .lesson-selector { left: 14.5vw; position: relative; top: 5%; border-radius: 0.5vw; padding: 0.4vw; font-size: 1.1vw; display: block; width: 9vw; height: 4.5vh; text-align: center; background-color: blue; color: white; font-family: 'Jost', sans-serif;}
+  .lesson-selector:hover { background-color: #434aff; cursor: pointer; }
+  .Instructions { font-size: 1vw; top: 20%; position: absolute; margin-left: 1.5%;}
+  .bold-text { font-weight: bold; }
+  .code-editor { width: 100%; max-width: 30vw; max-height: 20vh; padding: 20px; border-radius: 5px;}
+  .code-input { position: relative; width: 100%; height: 15vh; resize: none; font-family: monospace; font-size: 0.75vw; color: #c5c8c6; background-color: #1d1f21; border: 1px solid #373b41; border-radius: 5px; padding-bottom: 50px; overflow-x: auto; white-space: pre-wrap;}
+  .code-input:focus { outline: none; border-color: #81a2be; }
+  .Submit { background-color: blue; color: white; border-radius: 10px; text-align: center; text-decoration: none; font-size: 1.5vw; margin-top: 0.3vh; margin-left: 84%; font-family: 'Jost', sans-serif; outline: none;}
+  .Submit:hover { background-color: #434aff; cursor: pointer; }
+  .NextLevel { background-color: blue; color: white; border-radius: 7px; min-width: 23%; text-align: center; text-decoration: none; font-size: 1.5vw; margin-top: 0.3vh; margin-left: 84%; font-family: 'Jost', sans-serif; outline: none;}
+  .NextLevel:hover{ background-color: #434aff; cursor: pointer; }
+  .contextCSS2{ position: absolute; top: 2.4vh; border-radius: 7px; right: 11vw; width: 23%;}
+  .Code-Input-Box { position: absolute; border-radius: 20px; width: 58.25%; height: 32vh; background-color: #313131; margin-top: 0.75%; margin-left: 2%; right: 0.75%;}
+  #showAnswerButton{ font-size: 0.8vw; background: none; border: none; color: grey; text-decoration: underline; cursor: pointer; margin-left: 2%;}
+  #showAnswerButton:hover{ color: lightgrey; }
+  .NavBar a { font-family: 'Jost', sans-serif; font-size: 1vw; text-decoration: none; color: white;}
+  .nav a:hover { text-decoration: underline; color: #B0B0B0; }
+  .nav { display: flex; justify-content: space-between; width: 22vw; list-style: none; align-items: center; z-index: 999; margin-right: 1vw;}
+  .header { display: flex; justify-content: space-between; height: 8vh; background-color: black;}
+  .header-logo { transition: transform 0.2s ease; height: 100%;}
+  .header-logo:hover { transform: scale(1.1); }
+  .Menu { position: relative; display: inline-block;}
+  .menu-content { display: none; position: absolute; background-color: #636262; border-radius: 20px; box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2); right: 0vw; animation: slide-down 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards; transform-origin: top center; transform: scaleY(0);}
+  @keyframes slide-down { 0% { transform: scaleY(0); opacity: 0; } 100% { transform: scaleY(1); opacity: 1; } }
+  .menu-content a { color: white; padding: 12px 16px; text-decoration: none; display: block;}
+  .menu-content a:hover { text-decoration: underline; background-color: grey; border-radius: 20px; }
+  .Menu:hover .menu-content { display: block; }

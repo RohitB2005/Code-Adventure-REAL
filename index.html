@@ -92,15 +92,10 @@ left:
 </body>
   <script type="module" src="script.js"></script>
   <script type="module" src="auth.js" defer></script>
-  <!-- In index.html -->
   <script type="module">
-    // 1. IMPORT FROM OUR CENTRAL CONFIG, NOT THE SDK
     import { auth, db } from './firebase-config.js';
-    // 2. Import ONLY the functions we need
     import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-auth.js";
     import { doc, getDoc } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-firestore.js";
-    
-    // NOTE: We no longer call getAuth() or getFirestore() here. We use the imported ones.
 
     function updateUserLevelAccess(unlockedLevel) {
       const lessonSelect = document.getElementById('lesson-select');

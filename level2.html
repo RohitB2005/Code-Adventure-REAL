@@ -80,7 +80,7 @@ position: absolute;
 z-index: 
 }</textarea>
       <button class="Submit">Submit</button>
-      <a href="error.html" class="NextLevel" style="display: none;">Next Level</a>
+      <a href="level3.html" class="NextLevel" style="display: none;">Next Level</a>
     </div>
     <button id="showAnswerButton">Show Answer</button>
     <img class="contextCSS2" src="images/contextCSS2.PNG" alt="context-image">
@@ -89,9 +89,7 @@ z-index:
 <script type = "module" src="level2.js"></script>
 <script type="module" src="auth.js"></script>
 <script type="module">
-  // 1. IMPORT FROM OUR CENTRAL CONFIG, NOT THE SDK
   import { auth, db } from './firebase-config.js';
-  // 2. Import ONLY the functions we need
   import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-auth.js";
   import { doc, getDoc } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-firestore.js";
 
@@ -124,7 +122,7 @@ z-index:
               const userDoc = await getDoc(userDocRef);
               const userUnlockedLevel = userDoc.data()?.lastLevel || 1;
 
-              // **CRITICAL SECURITY CHECK**
+             
               if (thisLevel > userUnlockedLevel) {
                   alert("You haven't unlocked this level yet! Returning to your last level.");
                   const lastLevelPage = userUnlockedLevel === 1 ? 'index.html' : `level${userUnlockedLevel}.html`;
