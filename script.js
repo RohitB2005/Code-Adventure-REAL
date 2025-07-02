@@ -1,5 +1,5 @@
 import { auth, db } from './firebase-config.js';
-import { doc, setDoc } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-firestore.js";
+import { doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-firestore.js";
 
 document.addEventListener("DOMContentLoaded", () => {
     const expectedProperties = ["#character {", "position: relative;", "top: 63%;", "left: 73%;", "}"];
@@ -18,14 +18,25 @@ document.addEventListener("DOMContentLoaded", () => {
         const allPropertiesPresent = expectedProperties.every(property => userAnswer.includes(property));
 
         if (allPropertiesPresent) {
-            alert("Correct answer!");
+            alert("Correct answer! The sword has been claimed.");
             
             try {
                 const user = auth.currentUser;
                 if (user) {
                     const userDocRef = doc(db, "users", user.uid);
-                    await setDoc(userDocRef, { lastLevel: 2 }, { merge: true });
-                    console.log("Progress saved! Level 2 is now unlocked.");
+                    
+                  
+                    const userDoc = await getDoc(userDocRef);
+                    const currentLevel = userDoc.data()?.lastLevel || 1;
+                    const nextLevel = 2;
+
+                    // Only update if the user is actually progressing
+                    if (nextLevel > currentLevel) {
+                        await setDoc(userDocRef, { lastLevel: nextLevel }, { merge: true });
+                        console.log("Progress saved! Level 2 is now unlocked.");
+                    } else {
+                        console.log("User has already passed this level. No progress update needed.");
+                    }
                 }
             } catch (error) {
                 console.error("CRITICAL: Failed to save progress!", error);
@@ -33,6 +44,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 return;
             }
 
+            
             character.style.top = "63%";
             character.style.left = "62%";
             character.style.animation = "moveCharacter 2s linear, characterAnimation 0.5s steps(1) 4";
@@ -45,11 +57,11 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             }, 3000);
             setTimeout(() => { character.style.animation = "newIdleAnimation 1.7s infinite steps(5)"; }, 3000);
-            
             submitButton.style.display = "none";
             setTimeout(() => { nextLevelButton.style.display = "block"; nextLevelButton.style.marginLeft = "78%" }, 5000);
 
         } else {
+            // incorrect answer code
             submitButton.style.backgroundColor = "red";
             submitButton.textContent = "Incorrect";
             setTimeout(() => { submitButton.style.backgroundColor = "blue"; submitButton.textContent = "Submit"; }, 2000);
@@ -60,7 +72,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     document.getElementById("lesson-select").addEventListener("change", function () {
         var selectedValue = this.value;
-        var pageURLs = { "1": "index.html", "2": "level2.html", "3": "level3.html"};
+        var pageURLs = { "1": "index.html", "2": "level2.html", "3": "level3.html", "4": "level4.html"};
         if (pageURLs[selectedValue]) { window.location.href = pageURLs[selectedValue]; }
     });
 });

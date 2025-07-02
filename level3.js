@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     showAnswerButton.addEventListener("click", () => {
         const codeInput = document.querySelector(".code-input");
-        codeInput.value = `#Character {\n#hidden-passage {\n  display: block;\n}`;
+        codeInput.value = `#hidden-passage {\n  display: block;\n}`;
     });
 
     async function checkAnswer() {
@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const isCorrect = userAnswer.includes("#hidden-passage{") && userAnswer.includes("display:block");
 
         if (isCorrect) {
-            alert("Correct answer!");
+            alert("Correct answer! The exit has been revealed.");
             document.getElementById('hidden-passage').style.display = 'block';
             const character = document.getElementById("Character");
             character.style.animation = 
@@ -63,6 +63,7 @@ document.addEventListener("DOMContentLoaded", () => {
             "1": "index.html", 
             "2": "level2.html", 
             "3": "level3.html", 
+            "4": "level4.html"
         };
         if (pageURLs[selectedValue]) {
             window.location.href = pageURLs[selectedValue];

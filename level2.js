@@ -1,5 +1,5 @@
 import { auth, db } from './firebase-config.js';
-import { doc, setDoc } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-firestore.js";
+import { doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-firestore.js";
 
 document.addEventListener("DOMContentLoaded", () => {
     const expectedProperties = ["#character {", "position: absolute;", /z-index: [1-9][0-9]*;/, "}"];
@@ -21,40 +21,44 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
         if (allPropertiesPresent) {
-            alert("Correct answer!");
+            alert("Correct answer! A smooth escape.");
 
             try {
                 const user = auth.currentUser;
                 if (user) {
                     const userDocRef = doc(db, "users", user.uid);
-                    await setDoc(userDocRef, { lastLevel: 3 }, { merge: true });
-                    console.log("Progress saved! Level 3 is now unlocked.");
+
+                    const userDoc = await getDoc(userDocRef);
+                    const currentLevel = userDoc.data()?.lastLevel || 1;
+                    const nextLevel = 3;
+
+                    // Only update if the user is actually progressing
+                    if (nextLevel > currentLevel) {
+                        await setDoc(userDocRef, { lastLevel: nextLevel }, { merge: true });
+                        console.log("Progress saved! Level 3 is now unlocked.");
+                    } else {
+                        console.log("User has already passed this level. No progress update needed.");
+                    }
                 }
             } catch (error) {
                 console.error("CRITICAL: Failed to save progress!", error);
                 alert("There was an error saving your progress. Please try again.");
                 return;
             }
-            
+          
             character.style.zIndex = "1";
             character.style.animation = "moveCharacter 2s linear, characterAttackAnimation 2s steps(1) 2";
             character.style.animationFillMode = "forwards";
             character.addEventListener("animationend", () => {
-                character.style.animation = "idle 1.7s steps(1) infinite";
-            });
-
+              character.style.animation = "idle 1.7s steps(1) infinite";
+          });
             submitButton.style.display = "none";
-            setTimeout(() => {
-                nextLevelButton.style.display = "block";
-                nextLevelButton.style.marginLeft = "78%";
-            }, 5000);
+            setTimeout(() => { nextLevelButton.style.display = "block"; nextLevelButton.style.marginLeft = "78%"; }, 5000);
+
         } else {
             submitButton.style.backgroundColor = "red";
             submitButton.textContent = "Incorrect";
-            setTimeout(() => {
-                submitButton.style.backgroundColor = "blue";
-                submitButton.textContent = "Submit";
-            }, 2000);
+            setTimeout(() => { submitButton.style.backgroundColor = "blue"; submitButton.textContent = "Submit"; }, 2000);
         }
     }
 
@@ -62,7 +66,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     document.getElementById("lesson-select").addEventListener("change", function () {
         var selectedValue = this.value;
-        var pageURLs = { "1": "index.html", "2": "level2.html", "3": "level3.html"};
+        var pageURLs = { "1": "index.html", "2": "level2.html", "3": "level3.html", "4": "level4.html"};
         if (pageURLs[selectedValue]) {
             window.location.href = pageURLs[selectedValue];
         }

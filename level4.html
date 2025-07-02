@@ -4,13 +4,12 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
-  <title>Code Adventure - Level 3</title>
-  <link href="style_level3.css" rel="stylesheet" type="text/css">
+  <title>Code Adventure - Level 4</title>
+  <link href="style_level4.css" rel="stylesheet" type="text/css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Jost">
 </head>
 
 <body style="background-color: #181D2E;margin:0;">
-
   <div class="NavBar header">
     <a href="index.html">
       <img class="header-logo" alt="Logo" src="images/Logo.png">
@@ -31,20 +30,22 @@
     </div>
   </div>
 
-  <div class="Game-Window" style="background-image: url('images/level3-background.png');">
+  <div class="Game-Window" style="background-image: url('images/game-background.jpg');">
     <img id="Character" alt="Adventurer" src="images/idle-sword-hand-1.png">
-    <img id="hidden-passage" alt="A secret stone door" src="images/secret-door.png">
+    <img id="Bridge" alt="A stone bridge" src="images/bridge.png">
+    <img id="Food" alt="A tasty treat" src="images/food.webp">
   </div>
 
   <div class="Empty-Space"></div>
   <div class="Empty-Space-2"></div>
 
+  <!-- Instructions for Level 4 -->
   <div class="Instructions-Level">
     <select class="lesson-selector" id="lesson-select">
       <option value="1">Level 1 of 10</option>
       <option value="2">Level 2 of 10</option>
-      <option value="3" selected>Level 3 of 10</option>
-      <option value="4">Level 4 of 10</option>
+      <option value="3">Level 3 of 10</option>
+      <option value="4" selected>Level 4 of 10</option>
       <option value="5">Level 5 of 10</option>
       <option value="6">Level 6 of 10</option>
       <option value="7">Level 7 of 10</option>
@@ -53,37 +54,38 @@
       <option value="10">Level 10 of 10</option>
     </select>
     <p class="Instructions">
-        You've escaped the cage, but now you're in a dead-end corridor. Or is it?
-        <br><br>
-        In CSS, the <span class="bold-text">display</span> property is crucial. Setting it to <span class="bold-text">none</span> makes an element completely disappear. To make it visible again, you can set it to <span class="bold-text">block</span>.
-        <br><br>
-        There must be a secret door. Find the element with the ID <span class="bold-text">#hidden-passage</span> and make it appear!
-      </p>
+      Our adventurer has finally escaped the Dungeon, and made it back to where he started! All this running around has left him famished.
+      <br><br>
+      The CSS <span class="bold-text">transform</span> property lets you rotate, scale, and move elements. Use the <span class="bold-text">rotate()</span> function to fix the bridge, so that our adventurer can reach the tasty treat.
+      <br><br>
+      The bridge needs to be rotated by <span class="bold-text">-90</span> degrees. Remember to include the unit: <span class="bold-text">deg</span>.
+    </p>
   </div>
 
   <div class="Code-Input-Box">
     <div class="code-editor">
       <textarea class="code-input" placeholder="/*Enter your code here*/">
-#hidden-passage {
-  display: 
+#Bridge {
+  transform: 
 }
       </textarea>
       <button class="Submit">Submit</button>
-      <a href="level4.html" class="NextLevel" style="display: none;">Next Level</a>
+      <a href="level5.html" class="NextLevel" style="display: none;">Next Level</a>
     </div>
     <button id="showAnswerButton">Show Answer</button>
-    <img class="contextCSS2" src="images/contextCSS3.PNG" alt="context-image">
+    <img class="contextCSS2" src="images/contextCSS4.PNG" alt="context-image">
   </div>
 
 </body>
-<script type="module" src="level3.js"></script>
+<script type="module" src="level4.js"></script>
 <script type="module" src="auth.js"></script>
 <script type="module">
   import { auth, db } from './firebase-config.js';
   import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-auth.js";
   import { doc, getDoc } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-firestore.js";
 
-  const thisLevel = 3;
+  // THIS IS LEVEL 4
+  const thisLevel = 4;
 
   function updateUserLevelAccess(unlockedLevel) {
     const lessonSelect = document.getElementById('lesson-select');
@@ -111,17 +113,13 @@
       try {
         const userDoc = await getDoc(userDocRef);
         const userUnlockedLevel = userDoc.data()?.lastLevel || 1;
-
         if (thisLevel > userUnlockedLevel) {
           alert("You haven't unlocked this level yet! Returning to your last level.");
-          const lastLevelPage = userUnlockedLevel === 1 ? 'index.html' : `level${userUnlockedLevel}.html`;
-          window.location.href = lastLevelPage;
+          window.location.href = userUnlockedLevel === 1 ? 'index.html' : `level${userUnlockedLevel}.html`;
           return;
         }
-        
         updateUserLevelAccess(userUnlockedLevel);
       } catch (error) {
-        console.error("Error fetching user data:", error);
         window.location.href = 'index.html';
       }
     } else {
@@ -130,5 +128,4 @@
     }
   });
 </script>
-
 </html>
