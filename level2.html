@@ -86,39 +86,62 @@ z-index:
     <img class="contextCSS2" src="images/contextCSS2.PNG" alt="context-image">
   </div>
 </body>
-<script src="level2.js"></script>
+<script type = "module" src="level2.js"></script>
 <script type="module" src="auth.js"></script>
-  <script type="module">
-    /* Import necessary functions from firebase auth and firestore */
-    import { getAuth, onAuthStateChanged} from "https://www.gstatic.com/firebasejs/10.5.2/firebase-auth.js";
-    import { getFirestore, doc, updateDoc, getDoc} from "https://www.gstatic.com/firebasejs/10.5.2/firebase-firestore.js";
+<script type="module">
+  // 1. IMPORT FROM OUR CENTRAL CONFIG, NOT THE SDK
+  import { auth, db } from './firebase-config.js';
+  // 2. Import ONLY the functions we need
+  import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-auth.js";
+  import { doc, getDoc } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-firestore.js";
 
-    const db = getFirestore();
-    const auth = getAuth();
+  const thisLevel = 2;
 
-    /* Check if a user is logged in */
-        auth.onAuthStateChanged(async function (user) {
-            if (user) {
-                /* Get the user's unique ID */
-                const userUID = user.uid;
-                /* Reference to users document in firebase */
-                const userDocRef = doc(db, "users", userUID);
+  function updateUserLevelAccess(unlockedLevel) {
+      const lessonSelect = document.getElementById('lesson-select');
+      if (!lessonSelect) return;
+      const options = lessonSelect.getElementsByTagName('option');
+      for (const option of options) {
+          const levelValue = parseInt(option.value, 10);
+          if (levelValue > unlockedLevel) {
+              option.disabled = true;
+              if (!option.textContent.includes('(Locked)')) {
+                 option.textContent += ' (Locked)';
+              }
+              option.style.color = '#888';
+          } else {
+              option.disabled = false;
+              option.textContent = option.textContent.replace(' (Locked)', '');
+              option.style.color = '';
+          }
+      }
+  }
+  
+  onAuthStateChanged(auth, async (user) => {
+      if (user) {
+          const userDocRef = doc(db, "users", user.uid);
+          try {
+              const userDoc = await getDoc(userDocRef);
+              const userUnlockedLevel = userDoc.data()?.lastLevel || 1;
 
-                try {
-                    /* Check the user's last level from Firestore database */
-                    const userDoc = await getDoc(userDocRef);
-                    const currentLastLevel = userDoc.data()?.lastLevel || 1; /* Default to 1 if no level is found */
-
-                    /* Update the user's last level in Firestore only if the new level is higher */
-                    if (currentLastLevel < 2) {
-                        updateDoc(userDocRef, { lastLevel: 2 });
-                        console.log("User's last level updated in Firestore.");
-                    }
-                } catch (error) {
-                    console.error("Error updating last level in Firestore:", error);
-                }
-            }
-        });
-    </script>
+              // **CRITICAL SECURITY CHECK**
+              if (thisLevel > userUnlockedLevel) {
+                  alert("You haven't unlocked this level yet! Returning to your last level.");
+                  const lastLevelPage = userUnlockedLevel === 1 ? 'index.html' : `level${userUnlockedLevel}.html`;
+                  window.location.href = lastLevelPage;
+                  return;
+              }
+              
+              updateUserLevelAccess(userUnlockedLevel);
+          } catch (error) {
+              console.error("Error fetching user data:", error);
+              window.location.href = 'index.html';
+          }
+      } else {
+          alert("Please log in to access this level.");
+          window.location.href = 'login.html#login';
+      }
+  });
+</script>
 
 </html>
