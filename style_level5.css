@@ -80,16 +80,16 @@
     100% { content: url(images/adventurer-attack2-05-1.3.png); }
   }
   
-  /* Guard's hurt animation (4 frames) */
+  /* Guard's hurt animation */
   @keyframes guardHurt {
     from { background-position: 0px 0; }
-    to   { background-position: -384px 0; } /* 4 frames * 96px */
+    to   { background-position: -384px 0; } 
   }
   
-  /* Guard's death animation (12 frames) */
+  /* Guard's death animation */
   @keyframes guardDeath {
     from { background-position: 0px 0; }
-    to   { background-position: -1152px 0; } /* 12 frames * 96px */
+    to   { background-position: -1152px 0; } 
   }
   
   /* A simple fade-out animation for after the death sequence */

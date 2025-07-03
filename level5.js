@@ -63,7 +63,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Show Answer button logic
     document.getElementById("showAnswerButton").addEventListener("click", () => {
-        // This now shows the syntactically correct answer.
         document.querySelector(".code-input").value = 
 `#MagicMissile {
   position: absolute;
@@ -97,29 +96,29 @@ document.addEventListener("DOMContentLoaded", () => {
         setTimeout(() => {
             missile.style.transform = 'scale(3)';
             missile.style.opacity = '0';
-            chandelier.style.top = '55%'; // This STARTS the 0.8s fall animation
+            chandelier.style.top = '55%'; 
         }, 800);
         
-        // At 1600ms: Chandelier has LANDED. Play crash sound and hurt animation.
+        // Chandelier has LANDED. Play crash sound and hurt animation.
         setTimeout(() => {
             if(isSoundOn) chandelierSound.play(); // Play sound when it hits
             guard.style.backgroundImage = "url('images/GUARDHURT.png')";
             guard.style.animation = 'guardHurt 0.5s steps(4) 1';
-        }, 1600); // 800ms for missile + 800ms for chandelier fall = 1600ms
+        }, 1600); 
 
-        // At 2100ms: Guard recovers, Adventurer attacks.
+        // Guard recovers, Adventurer attacks.
         setTimeout(() => {
             if(isSoundOn) swordSwingSound.play();
             character.style.animation = 'characterAttackAnimation 1.2s steps(11) 1';
         }, 2100);
 
-        // At 3300ms: Sword hits, Guard gets hurt again.
+        // Sword hits, Guard gets hurt again.
         setTimeout(() => {
             guard.style.backgroundImage = "url('images/GUARDHURT.png')";
             guard.style.animation = 'guardHurt 0.5s steps(4) 1';
         }, 3300);
 
-        // At 3800ms: Guard is defeated.
+        // Guard is defeated.
         setTimeout(() => {
             guard.style.backgroundImage = "url('images/GUARDDEATH.png')";
             guard.style.animation = 'guardDeath 1.5s steps(12) 1 forwards';
@@ -128,7 +127,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }, 1500);
         }, 3800);
 
-        // At 5300ms: Battle is over, return Adventurer to idle.
+        // Battle is over, return Adventurer to idle.
         setTimeout(() => {
             if(isSoundOn) winSound.play();
             character.style.animation = 'idle 1.7s infinite steps(5)';
@@ -137,10 +136,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     async function checkAnswer() {
-        // THE FIX: Normalize user input by only removing whitespace (spaces, tabs, newlines).
+        // Normalize user input by only removing whitespace (spaces, tabs, newlines).
         const userAnswer = document.querySelector(".code-input").value.toLowerCase().replace(/\s/g, '');
 
-        // THE FIX: The checks now look for the full "property:value;" string, including the semicolon.
+        // The checks now look for the full "property:value;" string, including the semicolon.
         // It also checks that the rule is inside the correct selector's curly braces.
         const isMissileCorrect = userAnswer.includes('#magicmissile{') &&
                                  userAnswer.includes(correctAnswers.missile.top) && 
