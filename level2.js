@@ -2,6 +2,35 @@ import { auth, db } from './firebase-config.js';
 import { doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-firestore.js";
 
 document.addEventListener("DOMContentLoaded", () => {
+    const escapeSound = new Audio('audio/cagebreak.mp3'); // First sound: e.g., breaking the cage
+    const victoryFanfare = new Audio('audio/level2victory.mp3'); // Second sound: the victory music
+    
+    // Set the volume for each sound individually
+    escapeSound.volume = 0.2; 
+    victoryFanfare.volume = 0.2;
+
+    const volumeToggle = document.getElementById('volume-toggle');
+    
+    // Check localStorage to remember the user's preference
+    let isSoundOn = localStorage.getItem('soundEnabled') !== 'false';
+
+    // Function to update the icon based on the sound state
+    const updateVolumeIcon = () => {
+        if (volumeToggle) {
+            volumeToggle.src = isSoundOn ? 'images/unmute.png' : 'images/mute.png';
+        }
+    };
+
+    // Set the initial icon when the page loads
+    updateVolumeIcon();
+   
+    if (volumeToggle) {
+        volumeToggle.addEventListener('click', () => {
+            isSoundOn = !isSoundOn; // Flip the state for toggle
+            localStorage.setItem('soundEnabled', isSoundOn); 
+            updateVolumeIcon(); 
+        });
+    }
     const expectedProperties = ["#character {", "position: absolute;", /z-index: [1-9][0-9]*;/, "}"];
     const submitButton = document.querySelector(".Submit");
     const nextLevelButton = document.querySelector(".NextLevel");
@@ -22,6 +51,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (allPropertiesPresent) {
             alert("Correct answer! A smooth escape.");
+
+            if (isSoundOn) {
+                escapeSound.addEventListener('ended', () => {
+                    victoryFanfare.play();
+                }, { once: true });
+                escapeSound.play();
+                setTimeout(() => {victoryFanfare.play();}, 2700);
+    
+            }
 
             try {
                 const user = auth.currentUser;

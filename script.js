@@ -2,6 +2,27 @@ import { auth, db } from './firebase-config.js';
 import { doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-firestore.js";
 
 document.addEventListener("DOMContentLoaded", () => {
+    const completionSound = new Audio('audio/level1victory.mp3');
+    completionSound.volume = 0.2;
+    const volumeToggle = document.getElementById('volume-toggle');
+    
+    // Check localStorage to remember the user's preference
+    let isSoundOn = localStorage.getItem('soundEnabled') !== 'false';
+
+    // Function to update the icon based on the sound state
+    const updateVolumeIcon = () => {
+        volumeToggle.src = isSoundOn ? 'images/unmute.png' : 'images/mute.png';
+    };
+
+    // Set the initial icon when the page loads
+    updateVolumeIcon();
+
+   
+    volumeToggle.addEventListener('click', () => {
+        isSoundOn = !isSoundOn; // Flip the state for toggle
+        localStorage.setItem('soundEnabled', isSoundOn); 
+        updateVolumeIcon(); 
+    });
     const expectedProperties = ["#character {", "position: relative;", "top: 63%;", "left: 73%;", "}"];
     const submitButton = document.querySelector(".Submit");
     const nextLevelButton = document.querySelector(".NextLevel");
@@ -19,6 +40,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (allPropertiesPresent) {
             alert("Correct answer! The sword has been claimed.");
+            if (isSoundOn) {
+                completionSound.play();
+            }
             
             try {
                 const user = auth.currentUser;

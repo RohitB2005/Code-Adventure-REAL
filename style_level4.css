@@ -278,6 +278,12 @@
     display: block;
   }
   
+  #volume-toggle {
+    height: 48px; 
+    width: 48px;
+    cursor: pointer;
+  }
+  
   @keyframes idle {
     0%   { content: url(images/idle-sword-hand-1.png); }
     20%  { content: url(images/idle-sword-hand-2.png); }

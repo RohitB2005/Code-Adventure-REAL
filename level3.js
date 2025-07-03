@@ -2,6 +2,32 @@ import { auth, db } from './firebase-config.js';
 import { doc, setDoc } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-firestore.js";
 
 document.addEventListener("DOMContentLoaded", () => {
+    const doorSound = new Audio('audio/gate.mp3'); // Sound for the door revealing
+    const runSound = new Audio('audio/running.mp3'); // Sound for the character running
+    
+    // Set individual volumes
+    doorSound.volume = 0.7;
+    runSound.volume = 0.2;
+
+    const volumeToggle = document.getElementById('volume-toggle');
+    
+    let isSoundOn = localStorage.getItem('soundEnabled') !== 'false';
+
+    const updateVolumeIcon = () => {
+        if (volumeToggle) {
+            volumeToggle.src = isSoundOn ? 'images/unmute.png' : 'images/mute.png';
+        }
+    };
+
+    updateVolumeIcon();
+   
+    if (volumeToggle) {
+        volumeToggle.addEventListener('click', () => {
+            isSoundOn = !isSoundOn;
+            localStorage.setItem('soundEnabled', isSoundOn); 
+            updateVolumeIcon(); 
+        });
+    }
     const expectedProperties = ["#hidden-passage", "display:block"]; 
     
     const submitButton = document.querySelector(".Submit");
@@ -22,6 +48,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (isCorrect) {
             alert("Correct answer! The exit has been revealed.");
+            if (isSoundOn) {
+                doorSound.play();
+                runSound.play();
+            }
             document.getElementById('hidden-passage').style.display = 'block';
             const character = document.getElementById("Character");
             character.style.animation = 

@@ -262,6 +262,12 @@
   display: block;
 }
 
+#volume-toggle {
+  height: 48px; 
+  width: 48px;
+  cursor: pointer;
+}
+
 
 /* Game Characters And Animation */
 #Character {

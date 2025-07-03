@@ -3,7 +3,52 @@ import { doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.5.2/f
 
 document.addEventListener("DOMContentLoaded", () => {
     
-    // THE FIX: Define the answers as full, correct CSS rules with semicolons.
+
+    const backgroundMusic = new Audio('audio/boss.mp3');
+    const missileSound = new Audio('audio/magicmissile.mp3');
+    const chandelierSound = new Audio('audio/chandelier.mp3');
+    const swordSwingSound = new Audio('audio/level2victory.mp3'); // Reusing the swing sound
+    const winSound = new Audio('audio/win.mp3');
+
+    // Set volumes
+    backgroundMusic.volume = 0.10;
+    missileSound.volume = 0.3;
+    chandelierSound.volume = 0.5;
+    swordSwingSound.volume = 0.3;
+    winSound.volume = 0.2;
+    
+    // Make background music loop
+    backgroundMusic.loop = true;
+
+    // --- Volume Toggle Logic ---
+    const volumeToggle = document.getElementById('volume-toggle');
+    let isSoundOn = localStorage.getItem('soundEnabled') !== 'false';
+
+    const updateVolumeIcon = () => {
+        if(volumeToggle) {
+            volumeToggle.src = isSoundOn ? 'images/unmute.png' : 'images/mute.png';
+        }
+    };
+    
+    const checkAndPlayMusic = () => {
+        if (isSoundOn) {
+            backgroundMusic.play().catch(e => console.error("Autoplay was prevented:", e));
+        } else {
+            backgroundMusic.pause();
+        }
+    };
+    
+    updateVolumeIcon();
+    checkAndPlayMusic();
+   
+    if(volumeToggle) {
+        volumeToggle.addEventListener('click', () => {
+            isSoundOn = !isSoundOn; 
+            localStorage.setItem('soundEnabled', isSoundOn); 
+            updateVolumeIcon();
+            checkAndPlayMusic();
+        });
+    }
     const correctAnswers = {
         missile: {
             top: "top:55%;",
@@ -35,6 +80,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // This function will play the entire choreographed victory sequence
     function runVictoryAnimation() {
+        backgroundMusic.pause();
+        if(isSoundOn) missileSound.play();
         const missile = document.getElementById('MagicMissile');
         const rope = document.getElementById('Rope');
         const chandelier = document.getElementById('Chandelier');
@@ -50,27 +97,29 @@ document.addEventListener("DOMContentLoaded", () => {
         setTimeout(() => {
             missile.style.transform = 'scale(3)';
             missile.style.opacity = '0';
+            chandelier.style.top = '55%'; // This STARTS the 0.8s fall animation
         }, 800);
         
+        // At 1600ms: Chandelier has LANDED. Play crash sound and hurt animation.
         setTimeout(() => {
+            if(isSoundOn) chandelierSound.play(); // Play sound when it hits
             guard.style.backgroundImage = "url('images/GUARDHURT.png')";
             guard.style.animation = 'guardHurt 0.5s steps(4) 1';
-            chandelier.style.top = '55%';
-        }, 800);
-    
-        setTimeout(() => {
-            guard.style.animation = 'guardHurt 0.5s steps(4) 1';
-        }, 1600);
+        }, 1600); // 800ms for missile + 800ms for chandelier fall = 1600ms
 
+        // At 2100ms: Guard recovers, Adventurer attacks.
         setTimeout(() => {
+            if(isSoundOn) swordSwingSound.play();
             character.style.animation = 'characterAttackAnimation 1.2s steps(11) 1';
         }, 2100);
 
+        // At 3300ms: Sword hits, Guard gets hurt again.
         setTimeout(() => {
             guard.style.backgroundImage = "url('images/GUARDHURT.png')";
             guard.style.animation = 'guardHurt 0.5s steps(4) 1';
         }, 3300);
 
+        // At 3800ms: Guard is defeated.
         setTimeout(() => {
             guard.style.backgroundImage = "url('images/GUARDDEATH.png')";
             guard.style.animation = 'guardDeath 1.5s steps(12) 1 forwards';
@@ -79,7 +128,9 @@ document.addEventListener("DOMContentLoaded", () => {
             }, 1500);
         }, 3800);
 
+        // At 5300ms: Battle is over, return Adventurer to idle.
         setTimeout(() => {
+            if(isSoundOn) winSound.play();
             character.style.animation = 'idle 1.7s infinite steps(5)';
         }, 5300);
     }

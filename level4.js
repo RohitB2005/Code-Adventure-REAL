@@ -2,6 +2,33 @@ import { auth, db } from './firebase-config.js';
 import { doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-firestore.js";
 
 document.addEventListener("DOMContentLoaded", () => {
+    const bridgeSound = new Audio('audio/bridge.mp3');
+    const runSound = new Audio('audio/running.mp3');
+    const eatSound = new Audio('audio/eat.mp3');
+    
+    bridgeSound.volume = 0.2;
+    runSound.volume = 0.2;
+    eatSound.volume = 0.2;
+
+    const volumeToggle = document.getElementById('volume-toggle');
+    
+    let isSoundOn = localStorage.getItem('soundEnabled') !== 'false';
+
+    const updateVolumeIcon = () => {
+        if(volumeToggle) {
+            volumeToggle.src = isSoundOn ? 'images/unmute.png' : 'images/mute.png';
+        }
+    };
+
+    updateVolumeIcon();
+   
+    if(volumeToggle) {
+        volumeToggle.addEventListener('click', () => {
+            isSoundOn = !isSoundOn; 
+            localStorage.setItem('soundEnabled', isSoundOn); 
+            updateVolumeIcon(); 
+        });
+    }
     const expectedAnswer = "transform:rotate(-90deg);";
     
     const submitButton = document.querySelector(".Submit");
@@ -18,6 +45,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (userAnswer.includes(expectedAnswer)) {
             alert("Correct! The bridge swings into place.");
+
+            if (isSoundOn) {
+                // 1. Play the bridge sound immediately
+                bridgeSound.play();
+
+                // 2. Wait 1.5s, then play the running sound
+                setTimeout(() => {
+                    runSound.play();
+                }, 600);
+                setTimeout(() => {
+                    eatSound.play();
+                }, 2750)
+            }
             
             bridge.style.transform = "rotate(0deg)";
             

@@ -86,6 +86,12 @@
     to { opacity: 1; }
   }
   
+  #volume-toggle {
+    height: 48px; 
+    width: 48px;
+    cursor: pointer;
+  }
+  
   .Instructions-Level { display: flex; position: absolute; background-color: #313131; width: 39.25%; height: 32vh; border-radius: 20px; margin-top: 0.75%; margin-left: 0.75%; font-family: 'Jost', sans-serif; color: white;}
   .lesson-selector { left: 14.5vw; position: relative; top: 5%; border-radius: 0.5vw; padding: 0.4vw; font-size: 1.1vw; display: block; width: 9vw; height: 4.5vh; text-align: center; background-color: blue; color: white; font-family: 'Jost', sans-serif;}
   .lesson-selector:hover { background-color: #434aff; cursor: pointer; }

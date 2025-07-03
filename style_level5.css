@@ -97,6 +97,12 @@
     to { opacity: 0; }
   }
 
+  #volume-toggle {
+    height: 48px; 
+    width: 48px;
+    cursor: pointer;
+  }
+
   .contextCSS2 {position: absolute; top: 2.4vh; border-radius: 7px; right: 11vw; width: 23%;}
   .contextCSS3{position: absolute; top: 15vh; border-radius: 7px; right: 11vw; width: 23%;}
   .Instructions-Level { display: flex; position: absolute; background-color: #313131; width: 39.25%; height: 32vh; border-radius: 20px; margin-top: 0.75%; margin-left: 0.75%; font-family: 'Jost', sans-serif; color: white; }
