@@ -1,6 +1,5 @@
 import { auth, db } from './firebase-config.js';
 import { doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-firestore.js";
-import { inject } from "@vercel/analytics"
 
 document.addEventListener("DOMContentLoaded", () => {
     const completionSound = new Audio('audio/level1victory.mp3');
