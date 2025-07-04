@@ -103,8 +103,8 @@
     cursor: pointer;
   }
 
-  .contextCSS2 {position: absolute; top: 2.4vh; border-radius: 7px; right: 11vw; width: 23%;}
-  .contextCSS3{position: absolute; top: 15vh; border-radius: 7px; right: 11vw; width: 23%;}
+  .contextCSS2 {position: absolute; top: 1.3vh; border-radius: 7px; right: 11vw; width: 23%;}
+  .contextCSS3{position: absolute; top: 13.9vh; border-radius: 7px; right: 11vw; width: 23%;}
   .Instructions-Level { display: flex; position: absolute; background-color: #313131; width: 39.25%; height: 32vh; border-radius: 20px; margin-top: 0.75%; margin-left: 0.75%; font-family: 'Jost', sans-serif; color: white; }
 .lesson-selector { left: 14.5vw; position: relative; top: 5%; border-radius: 0.5vw; padding: 0.4vw; font-size: 1.1vw; display: block; width: 9vw; height: 4.5vh; text-align: center; background-color: blue; color: white; font-family: 'Jost', sans-serif; cursor: pointer; }
 .lesson-selector:hover { background-color: #434aff; }
