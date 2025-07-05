@@ -56,8 +56,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 const userDoc = await getDoc(userDocRef);
                 const lastLevel = userDoc.data()?.lastLevel || 1;
                 alert(`Welcome Back! Resuming at level ${lastLevel}.`);
-                const destination = lastLevel === 1 ? 'index.html' : `level${lastLevel}.html`;
-                window.location.href = destination;
+                let destination;
+if (lastLevel === 1) {
+  destination = 'index.html';
+} else if (lastLevel >= 6) {
+  destination = 'error.html'; // Level 6+ not implemented yet
+} else {
+  destination = `level${lastLevel}.html`;
+}
+window.location.href = destination;
             })
             .catch((error) => alert(error.message));
     });
